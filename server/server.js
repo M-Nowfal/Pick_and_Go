@@ -20,6 +20,7 @@ app.use('/api/v1/',router);
 connect();
 
 //Server Running Port
-app.listen(process.env.PORT, () => {
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
     console.log("Server is Running at PORT :" + process.env.PORT);
 });
