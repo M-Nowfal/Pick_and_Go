@@ -5,12 +5,17 @@ import cors from 'cors';
 import connect from './config/connection.js';
 import router from './routes/router.js';
 
+const corsOptions = {
+    origin: process.env.PORT,
+    methods: "GET, HEAD, PUT, DELETE, POST, PATCH"
+};
+
 //Creations
 const app = express();
 dotenv.config();
 
 //Middlewares
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 //Routes
