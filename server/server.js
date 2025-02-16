@@ -6,7 +6,7 @@ import connect from './config/connection.js';
 import router from './routes/router.js';
 
 const corsOptions = {
-    origin: process.env.PORT,
+    origin: "*",
     methods: "GET, HEAD, PUT, DELETE, POST, PATCH"
 };
 
@@ -27,5 +27,5 @@ connect();
 //Server Running Port
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log("Server is Running at PORT :" + process.env.PORT);
+    console.log(`Server is Running at PORT : ${PORT}`);
 });
