@@ -37,25 +37,19 @@ import cors from 'cors';
 import connect from './config/connection.js';
 import router from './routes/router.js';
 
-// Load environment variables
 dotenv.config();
 
-// Initialize Express app
 const app = express();
 
-// CORS options
+// ✅ Updated CORS Configuration
 const corsOptions = {
-    origin: "*",
-    methods: "GET, HEAD, PUT, DELETE, POST, PATCH"
+    origin: "https://pick-and-go-lovat.vercel.app", // Allow only your frontend
+    methods: "GET, HEAD, PUT, DELETE, POST, PATCH",
+    credentials: true // Allow cookies/auth headers if needed
 };
 
 app.use(cors(corsOptions));
 app.use(express.json());
-
-// Root route to check if the server is running
-app.get("/", (req, res) => {
-    res.send("✅ API is working!");
-});
 
 // Routes
 app.use('/api/v1/', router);
@@ -63,11 +57,8 @@ app.use('/api/v1/', router);
 // Database Connection
 connect();
 
-// Server Running Port
+// Start Server
 const PORT = process.env.PORT || 3000;
-
 app.listen(PORT, () => {
-    console.log(`🚀 Server is Running at PORT: ${PORT}`);
-}).on("error", (err) => {
-    console.error("❌ Server startup error:", err);
+    console.log(`Server is Running at PORT: ${PORT}`);
 });
