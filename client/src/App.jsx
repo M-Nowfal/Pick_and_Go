@@ -11,10 +11,11 @@ import Slider from './components/Slider';
 import { useState } from 'react';
 import ProductDetail from './components/ProductDetail';
 import CartPage from './components/CartPage';
+import Orders from './components/Orders';
 
 function App() {
 
-	const [currentUser, setCurrentUser] = useState("Log-in");
+	const [currentUser, setCurrentUser] = useState("Guest");
 	const [totalItems, setTotalItems] = useState(0);
 	const [render, setRender] = useState(true);
 
@@ -28,6 +29,7 @@ function App() {
 				<Route path="/" element={<Home />} />
 				<Route path="/product-details/:id" element={<ProductDetail />} />
 				<Route path='/cart/:userId' element={<CartPage render={render} setRender={setRender} totalItems={totalItems} setTotalItems={setTotalItems} />} />
+				<Route path='/orders' element={<Orders />} />
 				<Route path="*" element={<PageNotFound />} />
 			</Routes>
 		</BrowserRouter>

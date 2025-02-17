@@ -1,6 +1,8 @@
+import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { toast } from 'sonner';
+import Loader from './Loader';
 
 const ProductDetail = () => {
 
@@ -12,10 +14,9 @@ const ProductDetail = () => {
     const {id} = useParams();
 
     useEffect(() => {
-        fetch(import.meta.env.VITE_API_URL+"/product-details/"+id)
-        .then(response => response.json())
-        .then(data => setProduct(data))
-        .catch(err => console.log(err.message));
+        axios.get(import.meta.env.VITE_API_URL+"/product-details/"+id)
+        .then(response => setProduct(response.data))
+        .catch(err => console.log(err.message))
     },[]);
 
     useEffect(() => {
@@ -24,24 +25,18 @@ const ProductDetail = () => {
     },[product])
 
     function addToCart() {
-        fetch(import.meta.env.VITE_API_URL+"/add-to-cart",{
-            method: "post",
-            body: JSON.stringify({
-                userId: import.meta.env.VITE_USER,
-                productId: id,
-                quantity: count
-            }),
-            headers: {"Content-Type": "application/json"}
-        }).then(response => response.json())
-        .then(data => toast.success(data.message))
-        .catch(err => toast.error("Error Occured"));
+        axios.post(import.meta.env.VITE_API_URL+"/add-to-cart",{
+            userId: import.meta.env.VITE_USER,
+            productId: id,
+            quantity: count
+        })
+        .then(response => toast.success(response.data.message))
+        .catch(err => toast.error("Error while adding to Cart"));
     }
 
     if (!product) {
         return (
-            <div>
-                <h1 className="d-flex justify-content-center align-items-center h-100 text-dark">Loading...</h1>
-            </div>
+           <Loader />
         );
     }
 

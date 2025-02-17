@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import ProductCards from './ProductCards';
+import Loader from './Loader';
+import axios from "axios";
 
 const Home = () => {
 
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState(null);
 
     useEffect(() => {
-        fetch(import.meta.env.VITE_API_URL)
-            .then(response => response.json())
-            .then(data => setProducts(data))
-            .catch(err => console.log(err.message));
+        axios.get(import.meta.env.VITE_API_URL)
+            .then(response => setProducts(response.data))
+            .catch(error => console.log(error.message));
     }, []);
 
     if (!products) {
         return (
-            <div>
-                <h1 className="d-flex justify-content-center align-items-center h-100">Loading...</h1>
-            </div>
+            <Loader />
         );
     }
 

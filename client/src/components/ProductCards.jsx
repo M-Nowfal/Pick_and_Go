@@ -1,7 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ProductCards = ({ id, name, image, price, description, ratings }) => {
+
+    const navigate = useNavigate();
+
     return (
         <div className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mt-3">
             <div className="card text-center shadow">
@@ -13,9 +16,7 @@ const ProductCards = ({ id, name, image, price, description, ratings }) => {
                     </div>
                     <div className="card-body">
                         <h5 className="card-title">{name}</h5>
-                        <Link to={`/product-details/${id}`} className="text-decoration-none">
-                            <p className="product-description">{description}</p>
-                        </Link>
+                        <p className="product-description text-secondary" onClick={() => navigate(`/product-details/${id}`)}>{description}</p>
                         <div className="ratings mt-auto">
                             <div className="rating-outer">
                                 <div className="rating-inner" style={{ width: `${ratings / 5 * 100}%` }} ></div>

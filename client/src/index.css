@@ -22,7 +22,12 @@
 }
 
 .product-description:hover {
-	color: orange;
+	color: rgba(255, 166, 0, 0.8) !important;
+}
+
+.inc-dec-btn {
+	padding: 0;
+	border: none;
 }
 
 /* Page Not Found */
@@ -76,16 +81,24 @@
 }
 
 @media (min-width:472px) and (max-width:509px) {
+
 	.current-login,
 	.cart {
 		visibility: hidden;
 	}
+
 	.pick_and_go-logo {
 		transform: translateX(40px);
 	}
+
 	.toggle-bar {
 		transform: translateY(-40px);
 	}
+}
+
+.cart {
+	position: relative;
+	cursor: pointer;
 }
 
 @media (min-width:660px) and (max-width:720px) {
@@ -98,29 +111,37 @@
 	.navbar {
 		height: 105px !important;
 	}
+
 	.offcanvas {
 		width: 75% !important;
 	}
+
 	.toggle-bar {
 		position: absolute;
 		top: 60px;
 	}
+
 	.current-login {
 		position: absolute;
 		top: 15px;
 		left: 50%;
 		transform: translateX(-50%);
 	}
+
 	.search-bar {
 		transform: translateX(20px);
 	}
+
 	.cart {
-		right: -350px;
-		top: -70px;
+		position: absolute;
+		right: 7px;
+		transform: translateY(-55px);
 	}
+
 	.cart-image {
 		width: 200px;
 	}
+
 	.product-container {
 		margin-top: 110px;
 	}
@@ -132,12 +153,14 @@
 	}
 }
 
-.cart {
-	position: relative;
-	display: flex;
-	align-items: center;
-	cursor: pointer;
+@media (max-width: 381px) {
+	.cart {
+		position: absolute;
+		right: 7px;
+		transform: translateY(-75px);
+	}
 }
+
 .cart .badge {
 	position: absolute;
 	right: 35px;
@@ -149,7 +172,7 @@
 
 /* Ratings */
 
-.ratings-num{
+.ratings-num {
 	position: relative;
 	left: -67px;
 	transform: translateY(-24px);
@@ -184,6 +207,7 @@
 	content: '\f005 \f005 \f005 \f005 \f005';
 	color: #f8ce0b;
 }
+
 .cursor {
 	cursor: pointer;
 }
@@ -196,4 +220,60 @@
 		top: 40%;
 		transform: translateX(30%);
 	}
+}
+
+/* Loader */
+.pulse-loader {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+}
+
+.pulse-loader div {
+	width: 15px;
+	height: 15px;
+	background-color: #ff9900;
+	/* Amazon-like orange */
+	border-radius: 50%;
+	animation: pulse 1.2s infinite ease-in-out;
+}
+
+.pulse-loader div:nth-child(1) {
+	animation-delay: 0s;
+}
+
+.pulse-loader div:nth-child(2) {
+	animation-delay: 0.2s;
+}
+
+.pulse-loader div:nth-child(3) {
+	animation-delay: 0.4s;
+}
+
+@keyframes pulse {
+
+	0%,
+	80%,
+	100% {
+		transform: scale(0.8);
+		opacity: 0.3;
+	}
+
+	40% {
+		transform: scale(1.2);
+		opacity: 1;
+	}
+}
+
+/* Slider */
+.list-element {
+	padding: 7px;
+	margin: 3px;
+	border-radius: 5px;
+}
+.list-element:hover {
+	background-color: beige;
+	padding-left: 20px;
+	cursor: pointer;
 }

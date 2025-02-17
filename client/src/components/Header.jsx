@@ -1,20 +1,21 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = ({ totalItems }) => {
 
     const [total, setTotal] = useState(totalItems);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(import.meta.env.VITE_API_URL + `/cart-items/${import.meta.env.VITE_USER}`)
-            .then((res) => res.json())
-            .then((data) => {
-                if(data.status){
-                    const totalItem = data.cart.cartItems.reduce((acc, item) => acc + item.quantity, 0);
-                    setTotal(totalItem);
-                }
-            })  
-            .catch((err) => console.error(err));
+        axios.get(import.meta.env.VITE_API_URL + `/cart-items/${import.meta.env.VITE_USER}`)
+        .then(response => {
+            if(response.data.success) {
+                const totalItem = data.cart.cartItems.reduce((acc, item) => acc + item.quantity, 0);
+                setTotal(totalItem);
+            }
+        })
+        .catch((err) => console.error(err));
     }, []);
 
     return (
@@ -33,8 +34,8 @@ const Header = ({ totalItems }) => {
                     <div className="input-group">
                         <select className="form-select category-dropdown rounded-start" id="category">
                             <option>All</option>
-                            <option>Electronics</option>
                             <option>Mobiles</option>
+                            <option>Laptops</option>
                             <option>Dresses</option>
                         </select>
                         <input type="text" className="form-control" id="search-product" placeholder="Search Product" />
@@ -49,13 +50,15 @@ const Header = ({ totalItems }) => {
                 </div>
 
                 <div className="nav-item me-4 d-none d-lg-block">
-                    <p className="m-0 text-white fw-bold">Orders</p>
+                    <p className="m-0 text-white fw-bold" onClick={() => navigate('/orders')}>Orders</p>
                 </div>
 
                 <Link to={`/cart/${import.meta.env.VITE_USER}`} className="text-decoration-none">
-                    <div className="nav-item cart">
-                        <i className="fas fa-shopping-cart text-white fs-4"></i>
-                        <span className="text-warning fw-bold ms-1">Cart<span className="badge badge-light bg-warning">{(totalItems == 0) ? total : totalItems}</span></span>
+                    <div className="p-relative cart-container">
+                        <div className="nav-item cart">
+                            <i className="fas fa-shopping-cart text-white fs-4"></i>
+                            <span className="text-warning fw-bold ms-1">Cart<span className="badge badge-light bg-warning">{(totalItems == 0) ? total : totalItems}</span></span>
+                        </div>
                     </div>
                 </Link>
             </div>
