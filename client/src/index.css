@@ -28,6 +28,7 @@
 .inc-dec-btn {
 	padding: 0;
 	border: none;
+	background-color: transparent;
 }
 
 /* Page Not Found */
