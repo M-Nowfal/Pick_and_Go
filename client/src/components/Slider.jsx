@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Slider = (props) => {
     return (
@@ -20,8 +21,8 @@ const Slider = (props) => {
                 <hr />
                 <h6 className="fs-5 fw-bold">Orders & Carts</h6>
                 <ul className="list-unstyled p-2">
-                    <li className="list-element">Carts</li>
-                    <li className="list-element">Orders</li>
+                    <li className="list-element"><Link to={`/cart/${import.meta.env.VITE_USER}`}className="text-reset text-decoration-none">Carts</Link></li>
+                    <li className="list-element"><Link to="/orders" className="text-reset text-decoration-none">Orders</Link></li>
                 </ul>
                 <hr />
                 <h6 className="fs-5 fw-bold">Help & Settings</h6>

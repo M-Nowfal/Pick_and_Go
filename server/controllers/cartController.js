@@ -21,7 +21,7 @@ export const addToCart = async (req, res, next) => {
                 item.productId.toString() === productId
             ));
             if (itemIndex > -1) {
-                return res.status(300).json({ message: "Product already in the Cart", success: false });
+                return res.status(201).json({ message: "Product already in the Cart", success: false });
             } else {
                 cart.cartItems.push({ productId, quantity });
             }

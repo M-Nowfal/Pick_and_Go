@@ -11,7 +11,7 @@ const Header = ({ totalItems }) => {
         axios.get(import.meta.env.VITE_API_URL + `/cart-items/${import.meta.env.VITE_USER}`)
         .then(response => {
             if(response.data.success) {
-                const totalItem = data.cart.cartItems.reduce((acc, item) => acc + item.quantity, 0);
+                const totalItem = response.data.cart.cartItems.reduce((acc, item) => acc + item.quantity, 0);
                 setTotal(totalItem);
             }
         })

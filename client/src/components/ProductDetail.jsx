@@ -31,7 +31,7 @@ const ProductDetail = () => {
             quantity: count
         })
         .then(response => toast.success(response.data.message))
-        .catch(err => toast.error("Error while adding to Cart"));
+        .catch(err => toast.error("Err while adding to Cart"));
     }
 
     if (!product) {
