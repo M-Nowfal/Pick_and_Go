@@ -24,7 +24,7 @@ function App() {
 	return (
 
 		<BrowserRouter>
-			<Toaster position="top-center" richColors />
+			<Toaster position="top-center" richColors swipeDirection="horizontal" />
 			<context.Provider value={{totalItems, setTotalItems}}>
 				<Header />
 				<Slider name={currentUser} />
