@@ -74,7 +74,7 @@ const CartPage = ({ render, setRender }) => {
                         ))}
                     </div>
                 </div>
-                {totalAmt > 0 && <div className="col-12 col-lg-6 order-summary justify-content-center">
+                {totalAmt > 0 && <div className="col-12 col-lg-6 order-summary justify-content-center my-5">
                     <h3 className="text-success">Order Summary</h3>
                     <h5>Total Items <span className="text-danger fw-bold fs-4">&nbsp;{totalItems}</span></h5>
                     <h5>Total Amount&nbsp; <sup className="text-secondary fs-5">₹</sup><span className="text-primary fw-bold fs-3">{totalAmt}</span></h5>
