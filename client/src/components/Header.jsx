@@ -1,22 +1,11 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { context } from "../App";
 
-const Header = ({ totalItems }) => {
+const Header = () => {
 
-    const [total, setTotal] = useState(totalItems);
     const navigate = useNavigate();
-
-    useEffect(() => {
-        axios.get(import.meta.env.VITE_API_URL + `/cart-items/${import.meta.env.VITE_USER}`)
-        .then(response => {
-            if(response.data.success) {
-                const totalItem = response.data.cart.cartItems.reduce((acc, item) => acc + item.quantity, 0);
-                setTotal(totalItem);
-            }
-        })
-        .catch((err) => console.error(err));
-    }, []);
+    const { totalItems, setTotalItems } = useContext(context);
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -57,7 +46,7 @@ const Header = ({ totalItems }) => {
                     <div className="p-relative cart-container">
                         <div className="nav-item cart">
                             <i className="fas fa-shopping-cart text-white fs-4"></i>
-                            <span className="text-warning fw-bold ms-1">Cart<span className="badge badge-light bg-warning">{(totalItems == 0) ? total : totalItems}</span></span>
+                            <span className="text-warning fw-bold ms-1">Cart<span className="badge badge-light bg-warning">{totalItems}</span></span>
                         </div>
                     </div>
                 </Link>

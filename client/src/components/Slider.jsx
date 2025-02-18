@@ -30,6 +30,7 @@ const Slider = (props) => {
                     <li className="list-element"><i className="fa-solid fa-user-tie text-secondary" /> Your Account</li>
                     <li className="list-element"><i className="fa-solid fa-globe text-secondary" /> English</li>
                     <li className="list-element">Customer Service</li>
+                    <li className="list-element">Seller</li>
                     <li className="list-element">Sign Out</li>
                 </ul>
             </div>

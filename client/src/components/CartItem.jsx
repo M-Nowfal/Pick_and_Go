@@ -3,9 +3,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
-const CartItem = ({ item, setCart, setRender, render, setLocalCart }) => {
+const CartItem = ({ item, setCart, setRender, render, setLocalCart, permisible, setPermisible }) => {
 
-    const [permisible, setPermisible] = useState(true);
     const [count, setCount] = useState(item.quantity);
 
     const updateCart = (operation) => {
@@ -64,7 +63,7 @@ const CartItem = ({ item, setCart, setRender, render, setLocalCart }) => {
                     </p>
                     <div className="w-75 mx-auto">
                         {
-                            (count == 1 && permisible) ? 
+                            (count == 1) ? 
                             <button className="inc-dec-btn" disabled={!permisible}>
                                 <i className={`fa-solid fa-trash-can text-dark fs-4 me-2 cursor ${(!permisible)?'opacity-25':''}`}
                                     onClick={() => {
@@ -78,7 +77,7 @@ const CartItem = ({ item, setCart, setRender, render, setLocalCart }) => {
                             <button className="inc-dec-btn" disabled={!permisible}>
                                 <i className={`fa-solid fa-square-minus text-danger fs-4 me-2 cursor ${(!permisible)?'opacity-25':''}`}
                                     onClick={() => {
-                                        if (count > 1 && permisible) {
+                                        if (count > 1) {
                                             setCount(prev => prev - 1);
                                             setLocalCart({ id: item._id, ope: false, isDel: false });
                                             updateCart("minus");
@@ -93,7 +92,7 @@ const CartItem = ({ item, setCart, setRender, render, setLocalCart }) => {
                             <i
                                 className={`fa-solid fa-square-plus text-success fs-4 ms-2 cursor disabled ${(!permisible)?'opacity-25':''}`}
                                 onClick={() => {
-                                    if (count < item.productId.stock && permisible) {
+                                    if (count < item.productId.stock) {
                                         setCount(prev => prev + 1);
                                         setLocalCart({ id: item._id, ope: true, isDel: false });
                                         updateCart("plus");

@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CartItem from "./CartItem";
 import { toast } from "sonner";
 import axios from "axios";
 import Loader from "./Loader";
+import { context } from "../App";
 
-const CartPage = ({ totalItems, setTotalItems, render, setRender }) => {
+const CartPage = ({ render, setRender }) => {
+
+    const { totalItems, setTotalItems } = useContext(context);
     const [cart, setCart] = useState(null);
     const [totalAmt, setTotalAmt] = useState(0);
     const [localCart, setLocalCart] = useState({ id: null, ope: null, isDel: null });
     const { userId } = useParams();
+    const [permisible, setPermisible] = useState(true);
 
     useEffect(() => {
         axios.get(import.meta.env.VITE_API_URL + `/cart-items/${userId}`)
@@ -64,11 +68,13 @@ const CartPage = ({ totalItems, setTotalItems, render, setRender }) => {
                                 setRender={setRender}
                                 render={render}
                                 setLocalCart={setLocalCart}
+                                permisible={permisible}
+                                setPermisible={setPermisible}
                             />
                         ))}
                     </div>
                 </div>
-                {totalAmt > 0 && <div className="col-12 order-summary my-5">
+                {totalAmt > 0 && <div className="col-12 col-lg-6 order-summary justify-content-center">
                     <h3 className="text-success">Order Summary</h3>
                     <h5>Total Items <span className="text-danger fw-bold fs-4">&nbsp;{totalItems}</span></h5>
                     <h5>Total Amount&nbsp; <sup className="text-secondary fs-5">₹</sup><span className="text-primary fw-bold fs-3">{totalAmt}</span></h5>

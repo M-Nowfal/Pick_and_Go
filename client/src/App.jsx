@@ -8,10 +8,12 @@ import Home from './components/Home';
 import PageNotFound from './components/PageNotFound';
 import Header from './components/Header';
 import Slider from './components/Slider';
-import { useState } from 'react';
+import { useState, createContext } from 'react';
 import ProductDetail from './components/ProductDetail';
 import CartPage from './components/CartPage';
 import Orders from './components/Orders';
+
+export const context = createContext(0);
 
 function App() {
 
@@ -20,18 +22,20 @@ function App() {
 	const [render, setRender] = useState(true);
 
 	return (
-		
+
 		<BrowserRouter>
 			<Toaster position="top-center" richColors />
-			<Header totalItems={totalItems} />
-			<Slider name={currentUser} />
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/product-details/:id" element={<ProductDetail />} />
-				<Route path='/cart/:userId' element={<CartPage render={render} setRender={setRender} totalItems={totalItems} setTotalItems={setTotalItems} />} />
-				<Route path='/orders' element={<Orders />} />
-				<Route path="*" element={<PageNotFound />} />
-			</Routes>
+			<context.Provider value={{totalItems, setTotalItems}}>
+				<Header />
+				<Slider name={currentUser} />
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/product-details/:id" element={<ProductDetail />} />
+					<Route path='/cart/:userId' element={<CartPage render={render} setRender={setRender} />} />
+					<Route path='/orders' element={<Orders />} />
+					<Route path="*" element={<PageNotFound />} />
+				</Routes>
+			</context.Provider>
 		</BrowserRouter>
 	);
 }

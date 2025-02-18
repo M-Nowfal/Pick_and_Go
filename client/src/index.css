@@ -218,8 +218,9 @@
 @media (min-width: 992px) {
 	.order-summary {
 		position: fixed;
+		text-align: start;
 		top: 40%;
-		transform: translateX(30%);
+		transform: translateX(140%);
 	}
 }
 

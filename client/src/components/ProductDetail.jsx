@@ -1,8 +1,9 @@
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import Loader from './Loader';
+import { context } from '../App';
 
 const ProductDetail = () => {
 
@@ -11,32 +12,37 @@ const ProductDetail = () => {
     const [len, setLen] = useState(0);
     const [count, setCount] = useState(1);
     let currentImage = useRef(0);
-    const {id} = useParams();
+    const { id } = useParams();
 
     useEffect(() => {
-        axios.get(import.meta.env.VITE_API_URL+"/product-details/"+id)
-        .then(response => setProduct(response.data))
-        .catch(err => console.log(err.message))
-    },[]);
+        axios.get(import.meta.env.VITE_API_URL + "/product-details/" + id)
+            .then(response => setProduct(response.data))
+            .catch(err => console.log(err.message))
+    }, []);
 
     useEffect(() => {
         product && setImage(product.images[0]);
         product && setLen(product.images.length);
-    },[product])
+    }, [product])
+
+    const { totalItems, setTotalItems } = useContext(context);
 
     function addToCart() {
-        axios.post(import.meta.env.VITE_API_URL+"/add-to-cart",{
+        axios.post(import.meta.env.VITE_API_URL + "/add-to-cart", {
             userId: import.meta.env.VITE_USER,
             productId: id,
             quantity: count
         })
-        .then(response => toast.success(response.data.message))
-        .catch(err => toast.error("Err while adding to Cart"));
+            .then(response => {
+                setTotalItems(totalItems + count);
+                return toast.success(response.data.message);
+            })
+            .catch(err => toast.error("Err while adding to Cart"));
     }
 
     if (!product) {
         return (
-           <Loader />
+            <Loader />
         );
     }
 
@@ -51,15 +57,15 @@ const ProductDetail = () => {
                                 <div className="me-5 pe-5">
                                     <i className="fa-solid fa-angle-left bg-secondary p-2 rounded-circle text-white" onClick={() => {
                                         currentImage.current = (currentImage.current - 1 + len) % len;
-                                        setImage(product.images[currentImage.current]); 
-                                        }}>
+                                        setImage(product.images[currentImage.current]);
+                                    }}>
                                     </i>
                                 </div>
                                 <div className="ms-5 ps-5">
                                     <i className="fa-solid fa-angle-right bg-secondary p-2 rounded-circle text-white" onClick={() => {
                                         currentImage.current = (currentImage.current + 1) % len;
-                                        setImage(product.images[currentImage.current]); 
-                                        }}>
+                                        setImage(product.images[currentImage.current]);
+                                    }}>
                                     </i>
                                 </div>
                             </div>
@@ -79,11 +85,12 @@ const ProductDetail = () => {
                                 <span className="text-secondary">INR </span>
                                 <sup className="text-danger">₹</sup>{product.price}
                             </h5>
-                            <div>
+                            <div className="d-flex justify-content-center">
                                 <h6>
-                                    <i className="fa-solid fa-circle-minus text-danger" onClick={() => count > 1 && setCount(count-1)}></i>
-                                    &nbsp;Quantity : {count}&nbsp; 
-                                    <i className="fa-solid fa-circle-plus text-success" onClick={() => count < product.stock && setCount(count+1)}></i></h6>
+                                    <i className="fa-solid fa-circle-minus text-danger fs-5 cursor" onClick={() => count > 1 && setCount(count - 1)}></i>
+                                    &nbsp;&nbsp;Quantity : {count}&nbsp;&nbsp;
+                                    <i className="fa-solid fa-circle-plus text-success fs-5 cursor" onClick={() => count < product.stock && setCount(count + 1)}></i>
+                                </h6>
                             </div>
                             <button className="btn btn-warning m-2 w-50 shadow" onClick={addToCart}>Add to Cart</button>
                             <Link to="/ss" className="btn btn-warning m-2 w-50 shadow">Buy now</Link>
