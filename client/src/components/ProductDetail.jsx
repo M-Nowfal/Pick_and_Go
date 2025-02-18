@@ -33,11 +33,11 @@ const ProductDetail = () => {
             productId: id,
             quantity: count
         })
-            .then(response => {
-                response.data.success && setTotalItems(totalItems + count);
-                return toast.success(response.data.message);
-            })
-            .catch(err => toast.error("Err while adding to Cart"));
+        .then(response => {
+            response.data.success && setTotalItems(totalItems + count);
+            return toast.success(response.data.message);
+        })
+        .catch(err => toast.error("Err while adding to Cart"));
     }
 
     if (!product) {
