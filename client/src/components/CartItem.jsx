@@ -1,14 +1,16 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import { context } from "../App";
 
 const CartItem = ({ item, setCart, setRender, render, setLocalCart, permisible, setPermisible }) => {
 
     const [count, setCount] = useState(item.quantity);
+    const { currentUserId } = useContext(context);
 
     const updateCart = (operation) => {
-        axios.put(import.meta.env.VITE_API_URL + `/update-cart-qty?userId=${import.meta.env.VITE_USER}&id=${item._id}&ope=${operation}`)
+        axios.put(import.meta.env.VITE_API_URL + `/update-cart-qty?userId=${currentUserId}&id=${item._id}&ope=${operation}`)
             .then(response => {
                 if (response.data.success) {
                     setCart(response.data.newCart);
@@ -20,7 +22,7 @@ const CartItem = ({ item, setCart, setRender, render, setLocalCart, permisible, 
     };
 
     const deleteCart = (id) => {
-        axios.delete(import.meta.env.VITE_API_URL + `/delete-cart/${import.meta.env.VITE_USER}/${id}`)
+        axios.delete(import.meta.env.VITE_API_URL + `/delete-cart/${currentUserId}/${id}`)
             .then(response => {
                 if (response.data.success) {
                     toast.success(response.data.message);

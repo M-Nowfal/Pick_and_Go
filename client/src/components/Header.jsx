@@ -1,11 +1,12 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { context } from "../App";
+import { toast } from "sonner";
 
-const Header = () => {
+const Header = ({ currentUser }) => {
 
     const navigate = useNavigate();
-    const { totalItems, setTotalItems } = useContext(context);
+    const { totalItems, currentUserId } = useContext(context);
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -34,19 +35,20 @@ const Header = () => {
                     </div>
                 </div>
 
-                <div className="nav-item me-4 d-lg-block current-login">
-                    <p className="m-0 text-white fw-bold">Accounts & Lists</p>
+                <div className="nav-item me-4 d-lg-block current-login d-flex">
+                    <i className="fa-solid fa-user-tie text-white fs-4" />&nbsp;&nbsp;
+                    <p className="m-0 text-white fw-bold" onClick={() => navigate('/user/login')}>{(currentUser) ? currentUser:"Accounts"}</p>
                 </div>
 
                 <div className="nav-item me-4 d-none d-lg-block">
                     <p className="m-0 text-white fw-bold" onClick={() => navigate('/orders')}>Orders</p>
                 </div>
 
-                <Link to={`/cart/${import.meta.env.VITE_USER}`} className="text-decoration-none">
-                    <div className="p-relative cart-container">
+                <Link to={(currentUserId) ? `/cart/${currentUserId}` : "/user/login" } className="text-decoration-none" onClick={() => {(currentUserId)?null:toast.error("Log in to See Cart Items")}}>
+                    <div className="cart-container">
                         <div className="nav-item cart">
                             <i className="fas fa-shopping-cart text-white fs-4"></i>
-                            <span className="text-warning fw-bold ms-1">Cart<span className="badge badge-light bg-warning">{totalItems}</span></span>
+                            <span className="total-cart-item badge bg-warning text-black fw-bold">{totalItems}</span>
                         </div>
                     </div>
                 </Link>

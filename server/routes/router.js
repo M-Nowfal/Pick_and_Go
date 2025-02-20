@@ -1,25 +1,26 @@
 import { Router } from 'express';
-import { userLogIn, userLogOut } from '../controllers/userController.js';
+import { userSignIn, userSignOut, userLogIn, userLogOut } from '../controllers/userController.js';
 import { getProducts, getSingleProduct } from '../controllers/productController.js';
 import { addToCart, deleteCartProduct, getCart, updateCart } from '../controllers/cartController.js';
 
 const router = Router();
+
 //Home Page
 router.route('/').get(getProducts);
 
-//Product-Details
+//Product Routes
 router.route('/product-details/:id').get(getSingleProduct);
 
-//Cart
+//Cart Routes
 router.route('/add-to-cart').post(addToCart);
 router.route('/cart-items/:userId').get(getCart);
-
 router.route('/update-cart-qty').put(updateCart);
-
 router.route('/delete-cart/:userId/:delId').delete(deleteCartProduct);
 
 //User Routes
-router.route('/user-login').get(userLogIn);
-router.route('/user-logout').get(userLogOut);
+router.route('/user/sign-in').post(userSignIn);
+router.route('/user/sign-out').post(userSignOut);
+router.route('/user/log-in').post(userLogIn);
+router.route('/user/log-out').post(userLogOut);
 
 export default router;

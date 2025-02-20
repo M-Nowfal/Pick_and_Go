@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import CartItem from "./CartItem";
 import { toast } from "sonner";
 import axios from "axios";
@@ -17,22 +17,22 @@ const CartPage = ({ render, setRender }) => {
 
     useEffect(() => {
         axios.get(import.meta.env.VITE_API_URL + `/cart-items/${userId}`)
-            .then(response => {
-                const data = response.data;
-                if (data.success && data.cart && data.cart.cartItems) {
-                    setCart(data.cart);
-                    const total = data.cart.cartItems.reduce((acc, item) => acc + item.quantity, 0);
-                    setTotalItems(total);
-                    const amt = data.cart.cartItems.reduce((acc, item) => acc + item.productId.price * item.quantity, 0);
-                    setTotalAmt(amt);
-                } else {
-                    setCart({ cartItems: [] });
-                    toast.error("Empty Cart");
-                }
-            }).catch((err) => {
-                console.error(err);
+        .then(response => {
+            const data = response.data;
+            if (data.success && data.cart && data.cart.cartItems) {
+                setCart(data.cart);
+                const total = data.cart.cartItems.reduce((acc, item) => acc + item.quantity, 0);
+                setTotalItems(total);
+                const amt = data.cart.cartItems.reduce((acc, item) => acc + item.productId.price * item.quantity, 0);
+                setTotalAmt(amt);
+            } else {
                 setCart({ cartItems: [] });
-            });
+                toast.error(response.data.message);
+            }
+        }).catch((err) => {
+            toast.error(err.message)
+            setCart({ cartItems: [] });
+        });
     }, []);
 
     useEffect(() => {
@@ -56,11 +56,21 @@ const CartPage = ({ render, setRender }) => {
     }
 
     return (
-        <div className="container mt-5 pt-3 text-center">
-            <h2 className="mt-5">{(totalItems == 0) ? "Empty Cart" : "Cart Items"}</h2>
+        <div className="container mt-5 pt-5 text-center">
+            <h2 className="mt-5">
+                {
+                    (totalItems == 0) ?
+                        <div className="cart-title">
+                            <h1 className="m-2">Your Pick&Go Cart Empty</h1>
+                            <Link to="/" className="btn btn-primary m-2">Go to Home</Link>
+                        </div>
+                        :
+                        "Cart Items"
+                }
+            </h2>
             <div className="row">
                 <div className="col-12 col-lg-9">
-                    <div className="cart-items">
+                    <div className="">
                         {cart && cart.cartItems.map((item) => (
                             <CartItem key={item._id}
                                 item={item}
@@ -74,12 +84,13 @@ const CartPage = ({ render, setRender }) => {
                         ))}
                     </div>
                 </div>
-                {totalAmt > 0 && <div className="col-12 col-lg-6 order-summary justify-content-center my-5">
-                    <h3 className="text-success">Order Summary</h3>
-                    <h5>Total Items <span className="text-danger fw-bold fs-4">&nbsp;{totalItems}</span></h5>
-                    <h5>Total Amount&nbsp; <sup className="text-secondary fs-5">₹</sup><span className="text-primary fw-bold fs-3">{totalAmt}</span></h5>
-                    <button className="btn btn-warning mt-2 shadow">Proceed to Buy ({totalItems} items)</button>
-                </div>
+                {
+                    totalAmt > 0 && <div className="col-12 col-lg-6 order-summary justify-content-center my-5">
+                        <h3 className="text-success">Order Summary</h3>
+                        <h5>Total Items <span className="text-danger fw-bold fs-4">&nbsp;{totalItems}</span></h5>
+                        <h5>Total Amount&nbsp; <sup className="text-secondary fs-5">₹</sup><span className="text-primary fw-bold fs-3">{totalAmt}</span></h5>
+                        <button className="btn btn-warning mt-2 shadow">Proceed to Buy ({totalItems} items)</button>
+                    </div>
                 }
             </div>
         </div>

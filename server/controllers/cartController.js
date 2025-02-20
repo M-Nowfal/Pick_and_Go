@@ -49,12 +49,12 @@ export const getCart = async (req, res, next) => {
             return res.status(400).json({ message: "Invalid User ID", success: false });
         }
 
-        const cart = await cartModel.findOne({ userId }).populate("cartItems.productId");
+        let cart = await cartModel.findOne({ userId });
 
         if (!cart) {
-            return res.status(404).json({ message: "Cart is empty", success: false });
+            return res.status(201).json({ message: "Cart is empty", success: false });
         }
-
+        cart = await cart.populate("cartItems.productId");
         return res.status(200).json({ cart, success: true });
 
     } catch (err) {
@@ -90,7 +90,7 @@ export const updateCart = async (req, res, next) => {
 
         const newCart = await cartModel.findOne({ userId }).populate("cartItems.productId");
 
-        res.status(200).json({ newCart , message: "Cart updated successfully", success: true });
+        res.status(200).json({ newCart, message: "Cart updated successfully", success: true });
 
     } catch (err) {
         console.error("Error updating cart:", err.message);
@@ -107,7 +107,7 @@ export const deleteCartProduct = async (req, res, next) => {
             { new: true }
         );
         if (!cart) {
-            return res.status(404).json({ message: "Cart not found", success: false  });
+            return res.status(404).json({ message: "Cart not found", success: false });
         }
         res.status(200).json({ message: "Product removed from cart", success: true });
     } catch (err) {

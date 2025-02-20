@@ -14,7 +14,8 @@
 
 .product-images {
 	width: 200px !important;
-	height: 200px;
+	object-fit: contain;
+	padding-top: 5px;
 }
 
 .product-description {
@@ -97,7 +98,14 @@
 	}
 }
 
-.cart {
+.cart-title {
+	background-color: antiquewhite;
+	padding: 10px;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px gray;
+}
+
+.cart-container {
 	position: relative;
 	cursor: pointer;
 }
@@ -135,7 +143,7 @@
 
 	.cart {
 		position: absolute;
-		right: 7px;
+		right: 10px;
 		transform: translateY(-55px);
 	}
 
@@ -154,7 +162,7 @@
 	}
 }
 
-@media (max-width: 381px) {
+@media (max-width: 382px) {
 	.cart {
 		position: absolute;
 		right: 7px;
@@ -162,17 +170,14 @@
 	}
 }
 
-.cart .badge {
+.total-cart-item {
 	position: absolute;
-	right: 35px;
-	padding: 4px;
+	right: 0px;
+	padding: 4px !important;
 	color: black;
-	transform: translateY(-10px);
+	transform: translateY(-12px);
 }
-
-
 /* Ratings */
-
 .ratings-num {
 	position: relative;
 	left: -67px;
@@ -284,4 +289,32 @@
 	background-color: beige;
 	padding-left: 20px;
 	cursor: pointer;
+}
+
+/* User Details */
+.user-form {
+	border: solid 1px black;
+	border-radius: 20px;
+}
+.user-input-field {
+	background-color: rgb(255, 247, 236);
+	box-shadow: inset 0px 0px 10px black;
+	width: 100%;
+	padding: 7px;
+	border-radius: 5px;
+	border: none;
+	outline: none;
+}
+.user-input-field::-webkit-outer-spin-button,
+.user-input-field::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.user-label-field {
+	padding: 5px;
+	margin: 2px;
+	font-weight: bold;
+	font-size: large;
+	border-radius: 5px;
+	border: none;
 }

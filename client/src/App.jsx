@@ -8,30 +8,40 @@ import Home from './components/Home';
 import PageNotFound from './components/PageNotFound';
 import Header from './components/Header';
 import Slider from './components/Slider';
-import { useState, createContext } from 'react';
+import { useState, createContext, useEffect } from 'react';
 import ProductDetail from './components/ProductDetail';
 import CartPage from './components/CartPage';
 import Orders from './components/Orders';
+import UserAuth from './components/UserAuth';
 
 export const context = createContext(0);
 
 function App() {
 
-	const [currentUser, setCurrentUser] = useState("Guest");
+	const [currentUser, setCurrentUser] = useState(null);
 	const [totalItems, setTotalItems] = useState(0);
 	const [render, setRender] = useState(true);
+	const [currentUserId, setCurrentUserId] = useState(null);
+
+	useEffect(() => {
+		const storedUser = sessionStorage.getItem("userName");
+        const storedUserId = sessionStorage.getItem("userId");
+        if (storedUser) setCurrentUser(storedUser);
+        if (storedUserId) setCurrentUserId(storedUserId);
+	},[]);
 
 	return (
 
 		<BrowserRouter>
 			<Toaster position="top-center" richColors  swipeDirections={["left", "right"]} />
-			<context.Provider value={{totalItems, setTotalItems}}>
-				<Header />
-				<Slider name={currentUser} />
+			<context.Provider value={{totalItems, setTotalItems, currentUserId, setCurrentUserId, setCurrentUser}}>
+				<Header currentUser={currentUser} />
+				<Slider currentUser={currentUser} />
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/product-details/:id" element={<ProductDetail />} />
 					<Route path='/cart/:userId' element={<CartPage render={render} setRender={setRender} />} />
+					<Route path='/user/:auth' element={<UserAuth />} />
 					<Route path='/orders' element={<Orders />} />
 					<Route path="*" element={<PageNotFound />} />
 				</Routes>

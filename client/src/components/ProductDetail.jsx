@@ -13,6 +13,7 @@ const ProductDetail = () => {
     const [count, setCount] = useState(1);
     let currentImage = useRef(0);
     const { id } = useParams();
+    const { currentUserId } = useContext(context);
 
     useEffect(() => {
         axios.get(import.meta.env.VITE_API_URL + "/product-details/" + id)
@@ -29,7 +30,7 @@ const ProductDetail = () => {
 
     function addToCart() {
         axios.post(import.meta.env.VITE_API_URL + "/add-to-cart", {
-            userId: import.meta.env.VITE_USER,
+            userId: currentUserId,
             productId: id,
             quantity: count
         })
@@ -55,14 +56,14 @@ const ProductDetail = () => {
                             <img className="card-img-top product-image" src={imgage} alt="Card image cap" />
                             <div className="d-flex justify-content-center">
                                 <div className="me-5 pe-5">
-                                    <i className="fa-solid fa-angle-left bg-secondary p-2 rounded-circle text-white" onClick={() => {
+                                    <i className="fa-solid fa-angle-left bg-secondary p-2 rounded-circle text-white cursor" onClick={() => {
                                         currentImage.current = (currentImage.current - 1 + len) % len;
                                         setImage(product.images[currentImage.current]);
                                     }}>
                                     </i>
                                 </div>
                                 <div className="ms-5 ps-5">
-                                    <i className="fa-solid fa-angle-right bg-secondary p-2 rounded-circle text-white" onClick={() => {
+                                    <i className="fa-solid fa-angle-right bg-secondary p-2 rounded-circle text-white cursor" onClick={() => {
                                         currentImage.current = (currentImage.current + 1) % len;
                                         setImage(product.images[currentImage.current]);
                                     }}>
@@ -92,7 +93,7 @@ const ProductDetail = () => {
                                     <i className="fa-solid fa-circle-plus text-success fs-5 cursor" onClick={() => count < product.stock && setCount(count + 1)}></i>
                                 </h6>
                             </div>
-                            <button className="btn btn-warning m-2 w-50 shadow" onClick={addToCart}>Add to Cart</button>
+                            <button className="btn btn-warning m-2 w-50 shadow" onClick={() => (currentUserId) ? addToCart() : toast.error("Login to add Products to Cart")}>Add to Cart</button>
                             <Link to="/ss" className="btn btn-warning m-2 w-50 shadow">Buy now</Link>
                         </div>
                     </div>
