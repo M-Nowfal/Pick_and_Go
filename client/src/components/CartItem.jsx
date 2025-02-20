@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { context } from "../App";
+import Loader from "./Loader";
 
 const CartItem = ({ item, setCart, setRender, render, setLocalCart, permisible, setPermisible }) => {
 
@@ -38,9 +39,7 @@ const CartItem = ({ item, setCart, setRender, render, setLocalCart, permisible, 
 
     if (!item) {
         return (
-            <div>
-                <h1 className="d-flex justify-content-center align-items-center h-100 text-dark">Loading...</h1>
-            </div>
+            <Loader />
         );
     }
 
