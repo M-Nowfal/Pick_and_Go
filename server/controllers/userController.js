@@ -1,4 +1,4 @@
-import bcrypt, { hash } from 'bcrypt';
+import bcryptjs from "bcryptjs";
 import userModel from "../models/userModel.js";
 
 //route  api/v1/user/sign-in
@@ -12,7 +12,7 @@ export const userSignIn = async (req, res, next) => {
         if (user) {
             return res.status(201).json({ message: "User already exist with this email or phone", success: false });
         } else {
-            const encriptedPassword = await bcrypt.hash(password, 10);
+            const encriptedPassword = bcryptjs.hashSync(password, bcryptjs.genSaltSync(10));
             const newUser = await userModel.create({ name, phone, email, password: encriptedPassword });
             return res.status(200).json({ message: `Welcome to Pick&Go ${name}`, id: newUser._id, success: true });
         }
@@ -33,7 +33,7 @@ export const userSignOut = async (req, res, next) => {
         }
         const user = await userModel.findOne({ $and: [{ phone, email }] });
         if (user) {
-            if (await bcrypt.compare(password, user.password)) {
+            if (bcryptjs.compareSync(password, user.password)) {
                 const deleteStatus = await userModel.findOneAndDelete({ _id: user._id });
                 console.log(deleteStatus);
                 return res.status(200).json({ message: "Successfully Sign-out", success: true });
@@ -61,7 +61,7 @@ export const userLogIn = async (req, res, next) => {
         }
         const user = await userModel.findOne({ phone });
         if (user) {
-            if (await bcrypt.compare(password, user.password)) {
+            if (bcryptjs.compareSync(password, user.password)) {
                 return res.status(200).json({ message: `Welcome Again ${user.name}`, id: user._id, userName: user.name, success: true });
             } else {
                 return res.status(201).json({ message: "Incorrect Password", success: false });
@@ -84,7 +84,7 @@ export const userLogOut = async (req, res, next) => {
         }
         const user = await userModel.findOne({ phone });
         if (user) {
-            if (await bcrypt.compare(password, user.password)) {
+            if (bcryptjs.compareSync(password, user.password)) {
                 return res.status(200).json({ message: `Successfully Log-out`, success: true });
             } else {
                 return res.status(201).json({ message: "Incorrect Password", success: false });
