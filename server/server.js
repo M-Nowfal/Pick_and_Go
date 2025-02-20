@@ -9,27 +9,12 @@ dotenv.config();
 
 const app = express();
 
-// const corsOptions = {
-//     origin: "https://pick-and-go-lovat.vercel.app", // Allow only your frontend
-//     methods: "GET, HEAD, PUT, DELETE, POST, PATCH",
-//     credentials: true // Allow cookies/auth headers if needed
-// };
-// app.use(cors(corsOptions));
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://pick-and-go-lovat.vercel.app");
-    res.header("Access-Control-Allow-Methods", "GET, HEAD, PUT, DELETE, POST, PATCH");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    res.header("Access-Control-Allow-Credentials", "true");
-    
-    // Handle preflight requests
-    if (req.method === "OPTIONS") {
-        return res.sendStatus(200);
-    }
-    
-    next();
-});
-
-// app.use(cors());
+const corsOptions = {
+    origin: "https://pick-and-go-lovat.vercel.app",
+    methods: "GET, HEAD, PUT, DELETE, POST, PATCH",
+    credentials: true
+};
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
