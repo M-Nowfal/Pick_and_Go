@@ -12,7 +12,7 @@ const Header = ({ currentUser }) => {
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div className="container-fluid d-flex align-items-center">
 
-                <div className="toggle-bar me-3" data-bs-toggle="offcanvas" data-bs-target="#slider" aria-controls="slider">
+                <div className="toggle-bar mt-1 me-3" data-bs-toggle="offcanvas" data-bs-target="#slider" aria-controls="slider">
                     <i className="fa-solid fa-bars text-warning fs-3"></i>
                 </div>
 
@@ -35,9 +35,9 @@ const Header = ({ currentUser }) => {
                     </div>
                 </div>
 
-                <div className="nav-item me-4 d-lg-block current-login d-flex">
+                <div className="nav-item me-4 d-lg-block current-login d-flex" onClick={() => !currentUser && navigate('/user/login')}>
                     <i className="fa-solid fa-user-tie text-white fs-4" />&nbsp;&nbsp;
-                    <p className="m-0 text-white fw-bold" onClick={() => navigate('/user/login')}>{(currentUser) ? currentUser:"Accounts"}</p>
+                    <p className="m-0 text-white fw-bold">{(currentUser) ? currentUser:"Accounts"}</p>
                 </div>
 
                 <div className="nav-item me-4 d-none d-lg-block">

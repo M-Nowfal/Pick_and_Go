@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { context } from '../App';
+import { context } from '../../App';
 import axios from 'axios';
 import { toast } from 'sonner';
 
@@ -71,7 +71,6 @@ const UserSignOut = () => {
 								<div className="text-center mt-2">
 									<button className="btn btn-warning my-3 fw-bold">Sign-out</button>
 								</div>
-								<Link to="/user/login" className="text-end text-decoration-none">already have an account?</Link>
 							</div>
 						</div>
 					</div>

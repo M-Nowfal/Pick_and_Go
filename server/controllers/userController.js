@@ -35,7 +35,6 @@ export const userSignOut = async (req, res, next) => {
         if (user) {
             if (bcryptjs.compareSync(password, user.password)) {
                 const deleteStatus = await userModel.findOneAndDelete({ _id: user._id });
-                console.log(deleteStatus);
                 return res.status(200).json({ message: "Successfully Sign-out", success: true });
             } else {
                 return res.status(201).json({ message: "Incorrect Password", success: false });

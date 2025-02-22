@@ -15,8 +15,10 @@ const ProductCards = ({ id, name, image, price, description, ratings }) => {
                         </Link>
                     </div>
                     <div className="card-body">
-                        <h5 className="card-title">{name}</h5>
-                        <p className="product-description text-secondary" onClick={() => navigate(`/product-details/${id}`)}>{description}</p>
+                        <div onClick={() => navigate(`/product-details/${id}`)}>
+                            <h5 className="card-title">{name}</h5>
+                            <p className="product-description text-secondary d-none d-sm-block">{description}</p>
+                        </div>
                         <div className="ratings mt-auto">
                             <div className="rating-outer">
                                 <div className="rating-inner" style={{ width: `${ratings / 5 * 100}%` }} ></div>

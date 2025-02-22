@@ -13,7 +13,8 @@
 }
 
 .product-images {
-	width: 200px !important;
+	width: 100% !important;
+	height: 200px !important;
 	object-fit: contain;
 	padding-top: 5px;
 }
@@ -23,7 +24,7 @@
 }
 
 .product-description:hover {
-	color: rgba(255, 166, 0, 0.8) !important;
+	color: rgb(255, 190, 70) !important;
 }
 
 .inc-dec-btn {
@@ -82,7 +83,7 @@
 	cursor: pointer;
 }
 
-@media (min-width:472px) and (max-width:509px) {
+@media (min-width:472px) and (max-width:510px) {
 
 	.current-login,
 	.cart {
@@ -90,11 +91,11 @@
 	}
 
 	.pick_and_go-logo {
-		transform: translateX(40px);
+		display: none;
 	}
 
 	.toggle-bar {
-		transform: translateY(-40px);
+		transform: translateY(-25px);
 	}
 }
 
@@ -106,13 +107,17 @@
 }
 
 .cart-container {
-	position: relative;
 	cursor: pointer;
 }
 
-@media (min-width:660px) and (max-width:720px) {
+@media (min-width:510px) and (max-width:617px) {
 	.cart {
-		visibility: hidden;
+		margin-top: 7px;
+	}
+}
+@media (min-width:617px) and (max-width:643px) {
+	.cart {
+		display: none;
 	}
 }
 

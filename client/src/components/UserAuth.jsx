@@ -1,15 +1,15 @@
-import UserLogin from "./UserLogin";
-import UserSignout from "./UserSignout";
-import UserSignin from "./UserSignin";
-import UserLogout from "./UserLogout";
 import { useParams } from "react-router-dom";
+import UserSignin from "./user-components/UserSignin";
+import UserLogin from "./user-components/UserLogin";
+import UserSignOut from "./user-components/UserSignout";
+import UserLogout from "./user-components/UserLogout";
 
 const UserAuth = () => {
 
     const { auth } = useParams();
 
     return (
-        (auth == "login") ? <UserLogin /> : (auth == "signout") ? <UserSignout /> : (auth == "logout") ? <UserLogout /> : <UserSignin />
+        (auth == "login") ? <UserLogin /> : (auth == "signout") ? <UserSignOut /> : (auth == "logout") ? <UserLogout /> : <UserSignin />
     );
 }
 

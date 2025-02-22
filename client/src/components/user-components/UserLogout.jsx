@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { context } from '../App';
+import { context } from '../../App';
 import axios from 'axios';
 import { toast } from 'sonner';
 
