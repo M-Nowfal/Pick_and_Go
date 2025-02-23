@@ -1,0 +1,10 @@
+/* Order Summary */
+
+@media (min-width: 992px) {
+	.order-summary {
+		position: fixed;
+		text-align: start;
+		top: 20%;
+		transform: translateX(140%);
+	}
+}

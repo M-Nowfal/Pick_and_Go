@@ -32,9 +32,9 @@ const productSchema = new mongoose.Schema({
         required: true,
         default: 0
     },
-    seller: {
+    sellerId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "sellers",
+        ref: "Seller",
         required: true
     },
     ratings: {

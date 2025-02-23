@@ -3,24 +3,16 @@ import ProductCards from './ProductCards';
 import Loader from './Loader';
 import axios from "axios";
 
-const Home = () => {
-
-    const [products, setProducts] = useState(null);
+const Home = ({ products, setProducts }) => {
 
     useEffect(() => {
-        axios.get(import.meta.env.VITE_API_URL)
-            .then(response => setProducts(response.data))
+        !products && axios.get(import.meta.env.VITE_API_URL)
+            .then(response => setProducts(response.data.products))
             .catch(error => console.log(error.message));
     }, []);
 
-    if (!products) {
-        return (
-            <Loader />
-        );
-    }
-
     return (
-        <div className="container-fluid product-container">
+        !products ? <Loader /> : <div className="container-fluid product-container">
             <div className="row justify-content-center mb-3">
                 {
                     products.map(product => (

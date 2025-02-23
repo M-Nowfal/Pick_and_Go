@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { context } from "../App";
 import { toast } from "sonner";
+import "../styles/header.css";
 
 const Header = ({ currentUser }) => {
 
@@ -17,7 +18,7 @@ const Header = ({ currentUser }) => {
                 </div>
 
                 <Link className="navbar-brand me-3" to="/">
-                    <img src="/Pick&Go.png" alt="pick_and_go Logo" className="pick_and_go-logo" />
+                    <img src="/Pick&Go.png" alt="pick_and_go Logo" className="pick_and_go-logo" title="Pick&Go" />
                 </Link>
 
                 <div className="search-bar flex-grow-1 mx-3">
@@ -30,22 +31,22 @@ const Header = ({ currentUser }) => {
                         </select>
                         <input type="text" className="form-control" id="search-product" placeholder="Search Product" />
                         <button className="btn btn-warning  rounded-end">
-                            <i className="fas fa-search"></i>
+                            <i className="fas fa-search" title="Search Products"></i>
                         </button>
                     </div>
                 </div>
 
-                <div className="nav-item me-4 d-lg-block current-login d-flex" onClick={() => !currentUser && navigate('/user/login')}>
+                <div className="nav-item me-4 d-lg-block current-login d-flex" onClick={() => !currentUser && navigate('/user/login')} title="Accounts">
                     <i className="fa-solid fa-user-tie text-white fs-4" />&nbsp;&nbsp;
                     <p className="m-0 text-white fw-bold">{(currentUser) ? currentUser:"Accounts"}</p>
                 </div>
 
-                <div className="nav-item me-4 d-none d-lg-block">
-                    <p className="m-0 text-white fw-bold" onClick={() => navigate('/orders')}>Orders</p>
+                <div className="nav-item me-4 d-none d-lg-block" title="Orders">
+                    <p className="m-0 text-white fw-bold" onClick={() => navigate('/order-page')}>Orders</p>
                 </div>
 
                 <Link to={(currentUserId) ? `/cart/${currentUserId}` : "/user/login" } className="text-decoration-none" onClick={() => {(currentUserId)?null:toast.error("Log in to See Cart Items")}}>
-                    <div className="cart-container">
+                    <div className="cart-container" title="Cart">
                         <div className="nav-item cart">
                             <i className="fas fa-shopping-cart text-white fs-4"></i>
                             <span className="total-cart-item badge bg-warning text-black fw-bold">{totalItems}</span>

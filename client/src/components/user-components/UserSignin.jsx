@@ -24,8 +24,8 @@ const UserSignin = () => {
         .then(response => {
             if (response.data.success) {
                 toast.success(response.data.message);
-                sessionStorage.setItem("userId", response.data.id);
-                sessionStorage.setItem("userName", userDetails.name);
+                localStorage.setItem("userId", response.data.id);
+                localStorage.setItem("userName", userDetails.name);
                 setCurrentUser(userDetails.name);
                 setCurrentUserId(response.data.id);
                 navigate('/');

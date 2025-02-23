@@ -18,7 +18,7 @@ const UserLogout = () => {
 		axios.post(`${import.meta.env.VITE_API_URL}/user/log-out`, { userDetails })
 		.then(response => {
 			if(response.data.success){
-				sessionStorage.clear();
+				localStorage.clear();
 				setCurrentUser(null);
 				setCurrentUserId(null);
 				setTotalItems(0);

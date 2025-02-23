@@ -1,19 +1,20 @@
 import productModel from "../models/productModel.js";
 
+// route   api/v1/product-details/:id
 export const getSingleProduct = async (req, res, next) => {
     try {
         const product = await productModel.findById(req.params.id);
-        res.status(200).json(product);
+        return res.status(200).json({message: "Successfully Product fetched", product, success: true});
     } catch (err) {
-        res.status(400);
+        return res.status(500).json({message: "Internal Server Error", success: false});
     }
 }
 
 export const getProducts = async (req, res, next) => {
     try {
         const products = await productModel.find({});
-        res.status(200).json(products);
+        return res.status(200).json({message: "Successfully Product fetched", products, success: true});
     } catch (err) { 
-        res.status(400);
+        return res.status(500).json({message: "Internal Server Error", success: false});
     }
 }

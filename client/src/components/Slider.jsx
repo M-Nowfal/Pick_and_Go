@@ -26,7 +26,7 @@ const Slider = (props) => {
                 <h6 className="fs-5 fw-bold">Orders & Carts</h6>
                 <ul className="list-unstyled p-2"  data-bs-dismiss="offcanvas">
                     <li className="list-element"><Link to={(currentUserId) ? `/cart/${currentUserId}` : ""}className="text-reset text-decoration-none">Carts</Link></li>
-                    <li className="list-element"><Link to="/orders" className="text-reset text-decoration-none">Orders</Link></li>
+                    <li className="list-element" onClick={() => navigate('/order-page')}>Orders</li>
                 </ul>
                 <hr />
                 <h6 className="fs-5 fw-bold">Help & Settings</h6>

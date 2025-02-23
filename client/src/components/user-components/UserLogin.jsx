@@ -18,8 +18,8 @@ const UserLogin = () => {
         .then(response => {
             if (response.data.success) {
                 toast.success(response.data.message);
-                sessionStorage.setItem("userId", response.data.id);
-                sessionStorage.setItem("userName", response.data.userName);
+                localStorage.setItem("userId", response.data.id);
+                localStorage.setItem("userName", response.data.userName);
                 setCurrentUser(response.data.userName);
                 setCurrentUserId(response.data.id);
                 navigate('/');

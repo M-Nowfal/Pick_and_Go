@@ -13,6 +13,8 @@ import ProductDetail from './components/ProductDetail';
 import CartPage from './components/CartPage';
 import Orders from './components/Orders';
 import UserAuth from './components/UserAuth';
+import Footer from './components/Footer';
+import OrderPage from './components/OrderPage';
 
 export const context = createContext(0);
 
@@ -22,10 +24,11 @@ function App() {
 	const [totalItems, setTotalItems] = useState(0);
 	const [render, setRender] = useState(true);
 	const [currentUserId, setCurrentUserId] = useState(null);
+	const [products, setProducts] = useState(null);
 
 	useEffect(() => {
-		const storedUser = sessionStorage.getItem("userName");
-        const storedUserId = sessionStorage.getItem("userId");
+		const storedUser = localStorage.getItem("userName");
+        const storedUserId = localStorage.getItem("userId");
         if (storedUser) setCurrentUser(storedUser);
         if (storedUserId) setCurrentUserId(storedUserId);
 	},[]);
@@ -38,13 +41,15 @@ function App() {
 				<Header currentUser={currentUser} />
 				<Slider currentUser={currentUser} />
 				<Routes>
-					<Route path="/" element={<Home />} />
+					<Route path="/" element={<Home products={products} setProducts={setProducts} />} />
 					<Route path="/product-details/:id" element={<ProductDetail />} />
 					<Route path='/cart/:userId' element={<CartPage render={render} setRender={setRender} />} />
 					<Route path='/user/:auth' element={<UserAuth />} />
 					<Route path='/orders' element={<Orders />} />
+					<Route path='/order-page' element={<OrderPage />} />
 					<Route path="*" element={<PageNotFound />} />
 				</Routes>
+				<Footer />
 			</context.Provider>
 		</BrowserRouter>
 	);

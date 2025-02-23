@@ -1,0 +1,100 @@
+.order-container {
+    margin-top: 120px;
+}
+.order-form {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.form-control:focus {
+    border-color: #ffc107;
+    box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+}
+.btn-custom {
+    background-color: #ffc107;
+    border: none;
+    color: white;
+}
+.btn-custom:hover {
+    background-color: #e0a800;
+}
+.order-input-field {
+    background-color: rgb(255, 247, 236);
+	box-shadow: inset 0px 0px 10px black;
+	width: 100%;
+	padding: 7px;
+	border-radius: 5px;
+	border: none;
+	outline: none;
+}
+.order-input-field:focus {
+    background-color: rgb(255, 247, 236);
+	box-shadow: 0px 0px 10px rgb(255, 255, 255);
+}
+
+/* Payment Method */
+.payment-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+h3 {
+    color: #007bff;
+}
+
+.payment-option {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.payment-option label {
+    color: #333;
+}
+
+.form-select {
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.total-price-box {
+    background: #f0f0f0;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.price {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.pay-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 8px;
+}
+
+.pay-btn:hover {
+    background: #218838;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

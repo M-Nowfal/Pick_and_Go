@@ -3,6 +3,7 @@ import UserSignin from "./user-components/UserSignin";
 import UserLogin from "./user-components/UserLogin";
 import UserSignOut from "./user-components/UserSignout";
 import UserLogout from "./user-components/UserLogout";
+import "../styles/user.css";
 
 const UserAuth = () => {
 

@@ -22,7 +22,7 @@ const UserSignOut = () => {
 			.then(response => {
 				if (response.data.success) {
 					toast.success(response.data.message);
-					sessionStorage.clear();
+					localStorage.clear();
 					setCurrentUser(null);
 					setCurrentUserId(null);
 					setTotalItems(0);

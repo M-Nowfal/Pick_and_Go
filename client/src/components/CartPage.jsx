@@ -1,19 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import CartItem from "./CartItem";
 import { toast } from "sonner";
 import axios from "axios";
 import Loader from "./Loader";
 import { context } from "../App";
+import "../styles/cartPage.css";
 
 const CartPage = ({ render, setRender }) => {
 
-    const { totalItems, setTotalItems } = useContext(context);
+    const { totalItems, setTotalItems, currentUserId } = useContext(context);
     const [cart, setCart] = useState(null);
     const [totalAmt, setTotalAmt] = useState(0);
     const [localCart, setLocalCart] = useState({ id: null, ope: null, isDel: null });
     const { userId } = useParams();
     const [permisible, setPermisible] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get(import.meta.env.VITE_API_URL + `/cart-items/${userId}`)
@@ -49,14 +51,8 @@ const CartPage = ({ render, setRender }) => {
         }
     }, [render]);
 
-    if (!cart) {
-        return (
-            <Loader />
-        );
-    }
-
     return (
-        <div className="container mt-5 pt-5 text-center">
+        !cart ? <Loader /> : <div className="container mt-5 pt-5 text-center">
             <h2 className="mt-5">
                 {
                     (totalItems == 0) ?
@@ -89,7 +85,7 @@ const CartPage = ({ render, setRender }) => {
                         <h3 className="text-success">Order Summary</h3>
                         <h5>Total Items <span className="text-danger fw-bold fs-4">&nbsp;{totalItems}</span></h5>
                         <h5>Total Amount&nbsp; <sup className="text-secondary fs-5">₹</sup><span className="text-primary fw-bold fs-3">{totalAmt}</span></h5>
-                        <button className="btn btn-warning mt-2 shadow">Proceed to Buy ({totalItems} items)</button>
+                        <button className="btn btn-warning mt-2 shadow" onClick={() => {navigate('/orders/?single=false');window.scrollTo({top:0})}}>Proceed to Buy ({totalItems} items)</button>
                     </div>
                 }
             </div>

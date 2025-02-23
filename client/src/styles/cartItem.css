@@ -1,0 +1,5 @@
+.cart-image {
+    width: 80%;
+    height: 180px;
+    object-fit: contain;
+}

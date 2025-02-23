@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { userSignIn, userSignOut, userLogIn, userLogOut } from '../controllers/userController.js';
 import { getProducts, getSingleProduct } from '../controllers/productController.js';
 import { addToCart, deleteCartProduct, getCart, updateCart } from '../controllers/cartController.js';
+import { placeOrder, getOrders } from '../controllers/orderController.js';
 
 const router = Router();
 
@@ -22,5 +23,9 @@ router.route('/user/sign-in').post(userSignIn);
 router.route('/user/sign-out').post(userSignOut);
 router.route('/user/log-in').post(userLogIn);
 router.route('/user/log-out').post(userLogOut);
+
+//Order Routes
+router.route('/order').post(placeOrder);
+router.route('/get-orders/:userId').get(getOrders);
 
 export default router;

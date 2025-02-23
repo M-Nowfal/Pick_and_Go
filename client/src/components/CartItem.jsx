@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { context } from "../App";
 import Loader from "./Loader";
+import "../styles/cartItem.css";
 
 const CartItem = ({ item, setCart, setRender, render, setLocalCart, permisible, setPermisible }) => {
 
@@ -37,14 +38,8 @@ const CartItem = ({ item, setCart, setRender, render, setLocalCart, permisible, 
 
     }
 
-    if (!item) {
-        return (
-            <Loader />
-        );
-    }
-
     return (
-        <div className="card text-center shadow my-3">
+        !item ? <Loader /> : <div className="card text-center shadow my-3">
             <div className="row pb-3">
                 <div className="col-6 text-center my-auto">
                     <Link to={`/product-details/${item.productId._id}`} className="text-decoration-none">
@@ -56,7 +51,7 @@ const CartItem = ({ item, setCart, setRender, render, setLocalCart, permisible, 
                     </h2>
                 </div>
                 <div className="col-6 my-auto pt-2">
-                    <h4 className="text-info">{item.productId.name}</h4>
+                    <h4 className="text-black fw-bold">{item.productId.name}</h4>
                     <h6>Brand: {item.productId.brand}</h6>
                     <p className="d-none d-lg-block">{item.productId.description}</p>
                     <p className="text-secondary">
