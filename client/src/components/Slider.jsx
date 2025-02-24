@@ -38,6 +38,7 @@ const Slider = (props) => {
                     {!currentUserId && <li className="list-element" onClick={() => navigate('/user/login')}>Log In</li>}
                     {currentUserId && <li className="list-element" onClick={() => navigate('/user/logout')}>Log Out</li>}
                     {currentUserId && <li className="list-element" onClick={() => navigate('/user/signout')}>Sign Out</li>}
+                    <li className="list-element" onClick={() => {localStorage.clear(); location.reload()}}>Clear Session</li>
                 </ul>
             </div>
         </div>

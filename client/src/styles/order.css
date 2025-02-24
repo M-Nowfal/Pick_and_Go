@@ -98,3 +98,30 @@ h3 {
         transform: translateY(0);
     }
 }
+
+.ordered-product-container {
+    margin-top: 125px;
+}
+.order-address-container {
+    background-color: antiquewhite;
+    padding: 7px;
+    box-shadow: 0px 0px 10px black;
+    border-radius: 20px;
+}
+.ordered-products {
+    background-color: antiquewhite;
+    padding: 7px;
+    box-shadow: 0px 0px 10px black;
+    border-radius: 10px;
+    width: fit-content;
+}
+.order-total {
+    background-color: antiquewhite;
+    padding: 7px;
+    box-shadow: 0px 0px 10px black;
+    border-radius: 10px;
+    width: fit-content;
+}
+.address-container {
+    border-radius: 20px;
+}

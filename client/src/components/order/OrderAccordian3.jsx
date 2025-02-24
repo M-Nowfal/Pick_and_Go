@@ -21,7 +21,7 @@ const OrderAccordian3 = ({ orderDetails, handleOrderDetails, totalAmt, orderProd
     }
 
     useEffect(() => {
-        orderdProducts && axios.post(`${import.meta.env.VITE_API_URL}/order`, { userId: localStorage.getItem("userId"), orderDetails, orderdProducts })
+        orderdProducts && axios.post(`${import.meta.env.VITE_API_URL}/order`, { userId: localStorage.getItem("userId"), orderDetails, orderdProducts, single })
             .then(response => {
                 if (response.data.success) {
                     toast.success(response.data.message);

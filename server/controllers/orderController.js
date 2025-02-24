@@ -1,19 +1,30 @@
 import orderModel from "../models/orderModel.js";
+import productModel from "../models/productModel.js";
 
-// //route api/v1/order/:userId
+//route api/v1/order/:userId
 export const placeOrder = async (req, res, next) => {
     try {
-        const { userId, orderDetails, orderdProducts } = req.body;
+        const { userId, orderDetails, orderdProducts, single } = req.body;
+        let products;
+        let totalAmount;
 
-        const products = await Promise.all(orderdProducts.pId.map(async (productId, index) => {
-            return {
-                productId,
-                quantity: orderdProducts.qty[index],
-                price: orderdProducts.price[index]
-            };
-        }));
-
-        const totalAmount = products.reduce((total, item) => total + (item.quantity * item.price), 0);
+        if (!single) {
+            products = await Promise.all(orderdProducts.pId.map(async (productId, index) => {
+                return {
+                    productId,
+                    quantity: orderdProducts.qty[index],
+                    price: orderdProducts.price[index]
+                };
+            }));
+            totalAmount = products.reduce((total, item) => total + (item.quantity * item.price), 0);
+        } else {
+            products = [{
+                productId: orderdProducts.pId,
+                quantity: orderdProducts.qty,
+                price: orderdProducts.price
+            }];
+            totalAmount = orderdProducts.price;
+        }
 
         const newOrder = new orderModel({
             userId,
@@ -35,18 +46,35 @@ export const placeOrder = async (req, res, next) => {
         });
 
         const savedOrder = await newOrder.save();
+
+        await Promise.all(savedOrder.products.map(async (item) => {
+            await productModel.findByIdAndUpdate(
+                item.productId,
+                { $inc: { stock: -item.quantity } },
+                { new: true }
+            );
+        }));
+
         res.status(201).json({ success: true, message: "Order placed successfully!", order: savedOrder });
 
-    } catch (error) {
-        console.error("Order Placement Error:", error);
-        res.status(500).json({ success: false, message: "Order failed", error: error.message });
-    }
-}
-
-export const getOrders = (req, res, next) => {
-    try {
-        res.json({message: "Orders page is under development"});
     } catch (err) {
+        console.error("Order Placement Error:", err);
+        res.status(500).json({ success: false, message: "Order failed" });
+    }
+};
 
+
+export const getOrders = async (req, res, next) => {
+    try {
+        const { userId } = req.params;
+        const order = await orderModel.findOne({ userId }).populate("products.productId");
+        if (order) {
+            return res.status(200).json({ message: "Ordered Products", success: true, orders: order });
+        } else {
+            return res.status(201).json({ message: "No Ordered Products", success: false, orders: null });
+        }
+    } catch (err) {
+        console.error("Order Placement Error:", err);
+        res.status(500).json({ success: false, message: "Internal Server Error" });
     }
 }
