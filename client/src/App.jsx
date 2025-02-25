@@ -25,30 +25,35 @@ function App() {
 	const [render, setRender] = useState(true);
 	const [currentUserId, setCurrentUserId] = useState(null);
 	const [products, setProducts] = useState(null);
+	const [cartItemsOrdered, setCartItemsOrdered] = useState(false);
 
 	useEffect(() => {
 		const storedUser = localStorage.getItem("userName");
-        const storedUserId = localStorage.getItem("userId");
-        if (storedUser) setCurrentUser(storedUser);
-        if (storedUserId) setCurrentUserId(storedUserId);
-	},[]);
+		const storedUserId = localStorage.getItem("userId");
+		if (storedUser) setCurrentUser(storedUser);
+		if (storedUserId) setCurrentUserId(storedUserId);
+	}, []);
 
 	return (
 
 		<BrowserRouter>
-			<Toaster position="top-center" richColors  swipeDirections={["left", "right"]} />
-			<context.Provider value={{totalItems, setTotalItems, currentUserId, setCurrentUserId, setCurrentUser}}>
+			<Toaster position="top-center" richColors swipeDirections={["left", "right"]} />
+			<context.Provider value={{ totalItems, setTotalItems, currentUserId, setCurrentUserId, setCurrentUser, cartItemsOrdered, setCartItemsOrdered }}>
 				<Header currentUser={currentUser} />
 				<Slider currentUser={currentUser} />
-				<Routes>
-					<Route path="/" element={<Home products={products} setProducts={setProducts} />} />
-					<Route path="/product-details/:id" element={<ProductDetail />} />
-					<Route path='/cart/:userId' element={<CartPage render={render} setRender={setRender} />} />
-					<Route path='/user/:auth' element={<UserAuth />} />
-					<Route path='/orders' element={<Orders />} />
-					<Route path='/order-page' element={<OrderPage />} />
-					<Route path="*" element={<PageNotFound />} />
-				</Routes>
+				<div className="main-container">
+					<div className="content">
+						<Routes>
+							<Route path="/" element={<Home products={products} setProducts={setProducts} />} />
+							<Route path="/product-details/:id" element={<ProductDetail />} />
+							<Route path='/cart/:userId' element={<CartPage render={render} setRender={setRender} />} />
+							<Route path='/user/:auth' element={<UserAuth />} />
+							<Route path='/orders' element={<Orders />} />
+							<Route path='/order-page' element={<OrderPage />} />
+							<Route path="*" element={<PageNotFound />} />
+						</Routes>
+					</div>
+				</div>
 				<Footer />
 			</context.Provider>
 		</BrowserRouter>

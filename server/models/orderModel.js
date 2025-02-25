@@ -21,7 +21,7 @@ const orderSchema = mongoose.Schema({
         fullName: { type: String, required: true },
         phone: { type: String, required: true },
         address: { type: String, required: true },
-        city: { type: String, required: true },
+        state: { type: String, required: true },
         postalCode: { type: String, required: true },
         country: { type: String, required: true }
     },
@@ -37,8 +37,12 @@ const orderSchema = mongoose.Schema({
     },
     deliveredAt: {
         type: Date
+    },
+    createdAt: {
+        type: Date,
+        default: new Date()
     }
-}, { timestamps: true });
+});
 
 const orderModel = mongoose.model("Order", orderSchema);
 

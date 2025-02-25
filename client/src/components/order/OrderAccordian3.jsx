@@ -1,22 +1,37 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { context } from '../../App';
 
 const OrderAccordian3 = ({ orderDetails, handleOrderDetails, totalAmt, orderProducts, single }) => {
 
     const navigate = useNavigate();
     const [orderdProducts, setOrderdProducts] = useState(null);
+    const { cartItemsOrdered, setCartItemsOrdered, setTotalItems } = useContext(context);
 
     function placeOrder() {
         if (single) {
             setOrderdProducts({ pId: orderProducts.productId._id, qty: 1, price: orderProducts.productId.price });
         } else {
-            setOrderdProducts({ 
-                pId: orderProducts.cartItems.map(item => item.productId._id), 
-                qty: orderProducts.cartItems.map(item => item.quantity), 
+            setOrderdProducts({
+                pId: orderProducts.cartItems.map(item => item.productId._id),
+                qty: orderProducts.cartItems.map(item => item.quantity),
                 price: orderProducts.cartItems.map(item => item.productId.price)
             });
+            if (cartItemsOrdered) {
+                axios.delete(`${import.meta.env.VITE_API_URL}/delete-ordered-cart/${localStorage.getItem("userId")}`)
+                    .then(response => {
+                        if (response.data.success) {
+                            toast.success(response.data.message);
+                            setCartItemsOrdered(false);
+                            setTotalItems(0);
+                        } else {
+                            toast.success(response.data.message);
+                        }
+                    })
+                    .catch(err => console.log(err.message));
+            }
         }
     }
 
@@ -72,15 +87,16 @@ const OrderAccordian3 = ({ orderDetails, handleOrderDetails, totalAmt, orderProd
                             </div>
                         )}
                         <div className="total-price-box text-center mt-4">
-                            <h4>🛒 Total Price: <span className="price">₹{totalAmt}</span></h4>
+                            <h4>🚚 Shipping Charge: <span className="fs-6">{(totalAmt > 499) ? "Eligible for Free Shipping" : "₹40"}</span></h4>
+                            <h4>🛒 Total Price: <span className="price">₹{(totalAmt > 499) ? totalAmt : totalAmt + 40}</span></h4>
                         </div>
                         <div className="text-center mt-3">
                             <button
                                 className="btn btn-success pay-btn"
                                 data-bs-toggle="collapse"
-                                data-bs-target={(!orderDetails.name || !orderDetails.phone || !orderDetails.address || !orderDetails.city || !orderDetails.postalCode || !orderDetails.country || orderDetails.phone.length !== 10) ? "#collapseTwo" : null}
+                                data-bs-target={(!orderDetails.name || !orderDetails.phone || !orderDetails.address || !orderDetails.state || !orderDetails.postalCode || !orderDetails.country || orderDetails.phone.length !== 10) ? "#collapseTwo" : null}
                                 onClick={() => {
-                                    if (!(!orderDetails.name || !orderDetails.phone || !orderDetails.address || !orderDetails.city || !orderDetails.postalCode || !orderDetails.country || orderDetails.phone.length !== 10)) {
+                                    if (!(!orderDetails.name || !orderDetails.phone || !orderDetails.address || !orderDetails.state || !orderDetails.postalCode || !orderDetails.country || orderDetails.phone.length !== 10)) {
                                         placeOrder();
                                     }
                                 }}

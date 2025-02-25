@@ -34,7 +34,7 @@ export const placeOrder = async (req, res, next) => {
                 fullName: orderDetails.name,
                 phone: orderDetails.phone,
                 address: orderDetails.address,
-                city: orderDetails.city,
+                state: orderDetails.state,
                 postalCode: orderDetails.postalCode,
                 country: orderDetails.country
             },
@@ -67,14 +67,29 @@ export const placeOrder = async (req, res, next) => {
 export const getOrders = async (req, res, next) => {
     try {
         const { userId } = req.params;
-        const order = await orderModel.findOne({ userId }).populate("products.productId");
+        const order = await orderModel.find({ userId }).populate("products.productId");
         if (order) {
-            return res.status(200).json({ message: "Ordered Products", success: true, orders: order });
+            if (order.length) {
+                return res.status(200).json({ message: "Ordered Products", success: true, orders: order, moreThanOne: true });
+            } else {
+                return res.status(200).json({ message: "Ordered Products", success: true, orders: order, moreThanOne: false });
+            }
         } else {
             return res.status(201).json({ message: "No Ordered Products", success: false, orders: null });
         }
     } catch (err) {
         console.error("Order Placement Error:", err);
         res.status(500).json({ success: false, message: "Internal Server Error" });
+    }
+}
+
+export const deleteOrder = async (req, res, next) => {
+    try {
+        const { orderId } = req.params;
+        await orderModel.findByIdAndDelete(orderId);
+        return res.status(200).json({ message: "Order Deleted", success: true });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ message: "Internal Server Error", success: false });
     }
 }

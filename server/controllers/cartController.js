@@ -114,3 +114,14 @@ export const deleteCartProduct = async (req, res, next) => {
         res.status(404).json({ message: "Internal Server Error", success: false });
     }
 }
+
+export const deleteCart = async (req, res, next) => {
+    try {
+        const { userId } = req.params;
+        await cartModel.findOneAndDelete({ userId });
+        return res.status(200).json({ message: "Cart Items removed", success: true });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ message: "Internal Server Error", success: false });
+    }
+}

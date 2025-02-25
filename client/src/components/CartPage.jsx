@@ -9,7 +9,7 @@ import "../styles/cartPage.css";
 
 const CartPage = ({ render, setRender }) => {
 
-    const { totalItems, setTotalItems, currentUserId } = useContext(context);
+    const { totalItems, setTotalItems, currentUserId, setCartItemsOrdered } = useContext(context);
     const [cart, setCart] = useState(null);
     const [totalAmt, setTotalAmt] = useState(0);
     const [localCart, setLocalCart] = useState({ id: null, ope: null, isDel: null });
@@ -85,7 +85,11 @@ const CartPage = ({ render, setRender }) => {
                         <h3 className="text-success">Order Summary</h3>
                         <h5>Total Items <span className="text-danger fw-bold fs-4">&nbsp;{totalItems}</span></h5>
                         <h5>Total Amount&nbsp; <sup className="text-secondary fs-5">₹</sup><span className="text-primary fw-bold fs-3">{totalAmt}</span></h5>
-                        <button className="btn btn-warning mt-2 shadow" onClick={() => {navigate('/orders/?single=false');window.scrollTo({top:0})}}>Proceed to Buy ({totalItems} items)</button>
+                        <button className="btn btn-warning mt-2 shadow" onClick={() => {
+                            navigate('/orders/?single=false');
+                            window.scrollTo({top:0});
+                            setCartItemsOrdered(true);
+                        }}>Proceed to Buy ({totalItems} items)</button>
                     </div>
                 }
             </div>

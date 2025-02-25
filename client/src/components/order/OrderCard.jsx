@@ -13,6 +13,7 @@ const OrderCard = (props) => {
                 <div className="d-none d-xl-block col-xl-4">{props.description}</div>
                 <div className="card-body col-6 col-xl-4">
                     <h5 className="card-title">{props.name}</h5>
+                    <p className="fw-bold text-secondary">Quantity <span className="text-primary">{props.qty}</span></p>
                     <h5>
                         <span className="text-secondary">INR </span>
                         <sup className="text-danger">₹</sup>{props.price}

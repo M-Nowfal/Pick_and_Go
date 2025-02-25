@@ -54,16 +54,16 @@ const OrderAccordian2 = ({ orderDetails, order, handleOrderDetails }) => {
                             </div>
                             <div className="row">
                                 <div className="col-6 mb-3">
-                                    <label className="form-label" htmlFor="city">City</label>
+                                    <label className="form-label" htmlFor="state">State</label>
                                     <input
                                         type="text"
-                                        className={`form-control order-input-field ${!orderDetails.city && order.current && "empty-field"}`}
-                                        id="city"
-                                        value={orderDetails.city}
-                                        placeholder="Enter city"
+                                        className={`form-control order-input-field ${!orderDetails.state && order.current && "empty-field"}`}
+                                        id="state"
+                                        value={orderDetails.state}
+                                        placeholder="Enter state"
                                         required
                                         autoComplete="address-level2"
-                                        onChange={(e) => handleOrderDetails("city", e.target.value)}
+                                        onChange={(e) => handleOrderDetails("state", e.target.value)}
                                     />
                                 </div>
                                 <div className="col-6 mb-3">
@@ -94,7 +94,7 @@ const OrderAccordian2 = ({ orderDetails, order, handleOrderDetails }) => {
                                 />
                             </div>
                             <div className="text-center mb-2">
-                                <button className="btn btn-custom mt-2 text-black fw-bold" data-bs-toggle="collapse" data-bs-target={(!orderDetails.name || !orderDetails.phone || !orderDetails.address || !orderDetails.city || !orderDetails.postalCode || !orderDetails.country) ? null : "#collapseThree"}
+                                <button className="btn btn-custom mt-2 text-black fw-bold" data-bs-toggle="collapse" data-bs-target={(!orderDetails.name || !orderDetails.phone || !orderDetails.address || !orderDetails.state || !orderDetails.postalCode || !orderDetails.country) ? null : "#collapseThree"}
                                     onClick={() => {
                                         order.current = true;
                                         if (!(orderDetails.phone.length === 10) ? true : false) {

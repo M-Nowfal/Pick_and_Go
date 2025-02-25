@@ -42,7 +42,7 @@ const Orders = () => {
         name: "",
         phone: "",
         address: "",
-        city: "",
+        state: "",
         postalCode: "",
         country: "",
         paymentMethod: "COD",

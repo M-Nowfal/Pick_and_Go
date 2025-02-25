@@ -102,26 +102,17 @@ h3 {
 .ordered-product-container {
     margin-top: 125px;
 }
-.order-address-container {
-    background-color: antiquewhite;
-    padding: 7px;
-    box-shadow: 0px 0px 10px black;
-    border-radius: 20px;
-}
-.ordered-products {
-    background-color: antiquewhite;
-    padding: 7px;
-    box-shadow: 0px 0px 10px black;
-    border-radius: 10px;
-    width: fit-content;
-}
-.order-total {
-    background-color: antiquewhite;
-    padding: 7px;
-    box-shadow: 0px 0px 10px black;
-    border-radius: 10px;
-    width: fit-content;
-}
 .address-container {
     border-radius: 20px;
+}
+.address-container-visible {
+    position: absolute;
+    background-color: #f8f9fa;
+    box-shadow: 0px 0px 10px black;
+    border-radius: 10px;
+    width: 300px;
+    padding: 7px;
+    right: 10px;
+    transform: translateY(70px);
+    z-index: 1;
 }
