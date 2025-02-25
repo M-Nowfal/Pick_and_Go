@@ -7,6 +7,13 @@ const Slider = (props) => {
     const { currentUserId } = useContext(context);
     const navigate = useNavigate();
 
+    function clearSession() {
+
+        if(confirm("Clearing the Session will make you to Log-out")){
+            localStorage.clear(); location.reload();
+        }
+    }
+
     return (
         <div className="offcanvas offcanvas-start bg-light" data-bs-scroll="true" tabIndex="-1" id="slider" aria-labelledby="offcanvasExampleLabel">
             <div className="offcanvas-header bg-dark">
@@ -38,7 +45,7 @@ const Slider = (props) => {
                     {!currentUserId && <li className="list-element" onClick={() => navigate('/user/login')}>Log In</li>}
                     {currentUserId && <li className="list-element" onClick={() => navigate('/user/logout')}>Log Out</li>}
                     {currentUserId && <li className="list-element" onClick={() => navigate('/user/signout')}>Sign Out</li>}
-                    <li className="list-element" onClick={() => {localStorage.clear(); location.reload()}}>Clear Session</li>
+                    <li className="list-element" onClick={clearSession}>Clear Session</li>
                 </ul>
             </div>
         </div>
