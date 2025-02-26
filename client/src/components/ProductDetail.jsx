@@ -95,7 +95,7 @@ const ProductDetail = () => {
                                         </h6>
                                     </div>
                                     <button className="btn btn-warning m-2 w-50 shadow" disabled={!product.stock} onClick={() => (currentUserId) ? addToCart() : toast.error("Login to add Products to Cart")}>Add to Cart</button>
-                                    <button className="btn btn-warning m-2 w-50 shadow" disabled={!product.stock} onClick={() => (currentUserId) ? navigate(`/orders/?single=true&productId=${id}`) : (toast.error("Login to add Products to Cart"), navigate('/user/login'))}>Buy Now</button>
+                                    <button className="btn btn-warning m-2 w-50 shadow" disabled={!product.stock} onClick={() => (currentUserId) ? navigate(`/orders/?single=true&productId=${id}&qty=${count}`) : (toast.error("Login to add Products to Cart"), navigate('/user/login'))}>Buy Now</button>
                                 </div>
                             </div>
                         </div>

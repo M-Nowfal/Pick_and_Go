@@ -20,9 +20,9 @@ const Orders = () => {
         if (searchParam.get("single") == "true") {
             axios.get(import.meta.env.VITE_API_URL + "/product-details/" + searchParam.get("productId"))
                 .then(response => {
-                    setOrderProducts({ productId: response.data.product, quantity: 1 });
+                    setOrderProducts({ productId: response.data.product, quantity: searchParam.get("qty") });
                     setSingle(true);
-                    setTotalAmt(response.data.product.price);
+                    setTotalAmt(response.data.product.price * searchParam.get("qty"));
                     setTryingToOrder(true);
                 })
                 .catch(err => console.log(err.message));

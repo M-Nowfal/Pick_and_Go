@@ -13,7 +13,7 @@ const OrderAccordian3 = ({ orderDetails, handleOrderDetails, totalAmt, orderProd
     function placeOrder() {
         setTryingToOrder(false);
         if (single) {
-            setOrderdProducts({ pId: orderProducts.productId._id, qty: 1, price: orderProducts.productId.price });
+            setOrderdProducts({ pId: orderProducts.productId._id, qty: orderProducts.quantity, price: orderProducts.productId.price * orderProducts.quantity });
         } else {
             setOrderdProducts({
                 pId: orderProducts.cartItems.map(item => item.productId._id),
