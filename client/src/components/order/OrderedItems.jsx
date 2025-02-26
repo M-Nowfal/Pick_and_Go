@@ -80,7 +80,7 @@ const OrderedItems = ({ orders, reloadOrders, setReloadOrders }) => {
                 </div>
             </div>
             <div className="text-center">
-                <button className="btn btn-outline-danger w-50" onClick={() => deleteOrder(orders._id)}>Cancel Order</button>
+                <button className="btn btn-outline-danger w-50 m-4" onClick={() => deleteOrder(orders._id)}>Cancel Order</button>
             </div>
             <hr />
         </div>

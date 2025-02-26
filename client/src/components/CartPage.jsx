@@ -9,7 +9,7 @@ import "../styles/cartPage.css";
 
 const CartPage = ({ render, setRender }) => {
 
-    const { totalItems, setTotalItems, currentUserId, setCartItemsOrdered } = useContext(context);
+    const { totalItems, setTotalItems, currentUserId, setCartItemsOrdered, setTryingToOrder } = useContext(context);
     const [cart, setCart] = useState(null);
     const [totalAmt, setTotalAmt] = useState(0);
     const [localCart, setLocalCart] = useState({ id: null, ope: null, isDel: null });
@@ -27,6 +27,7 @@ const CartPage = ({ render, setRender }) => {
                 setTotalItems(total);
                 const amt = data.cart.cartItems.reduce((acc, item) => acc + item.productId.price * item.quantity, 0);
                 setTotalAmt(amt);
+                setTryingToOrder(false);
             } else {
                 setCart({ cartItems: [] });
                 toast.error(response.data.message);

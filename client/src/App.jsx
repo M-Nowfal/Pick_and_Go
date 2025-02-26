@@ -26,6 +26,7 @@ function App() {
 	const [currentUserId, setCurrentUserId] = useState(null);
 	const [products, setProducts] = useState(null);
 	const [cartItemsOrdered, setCartItemsOrdered] = useState(false);
+	const [tryingToOrder, setTryingToOrder] = useState(false);
 
 	useEffect(() => {
 		const storedUser = localStorage.getItem("userName");
@@ -38,7 +39,12 @@ function App() {
 
 		<BrowserRouter>
 			<Toaster position="top-center" richColors swipeDirections={["left", "right"]} />
-			<context.Provider value={{ totalItems, setTotalItems, currentUserId, setCurrentUserId, setCurrentUser, cartItemsOrdered, setCartItemsOrdered }}>
+			<context.Provider value={{ totalItems, setTotalItems, 
+										currentUserId, setCurrentUserId, 
+										setCurrentUser, cartItemsOrdered, 
+										setCartItemsOrdered, tryingToOrder, 
+										setTryingToOrder 
+									}}>
 				<Header currentUser={currentUser} />
 				<Slider currentUser={currentUser} />
 				<div className="main-container">

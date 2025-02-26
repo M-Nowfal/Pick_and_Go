@@ -8,9 +8,10 @@ const OrderAccordian3 = ({ orderDetails, handleOrderDetails, totalAmt, orderProd
 
     const navigate = useNavigate();
     const [orderdProducts, setOrderdProducts] = useState(null);
-    const { cartItemsOrdered, setCartItemsOrdered, setTotalItems } = useContext(context);
+    const { cartItemsOrdered, setCartItemsOrdered, setTotalItems, setTryingToOrder } = useContext(context);
 
     function placeOrder() {
+        setTryingToOrder(false);
         if (single) {
             setOrderdProducts({ pId: orderProducts.productId._id, qty: 1, price: orderProducts.productId.price });
         } else {

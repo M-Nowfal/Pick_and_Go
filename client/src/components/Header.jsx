@@ -42,7 +42,7 @@ const Header = ({ currentUser }) => {
                 </div>
 
                 <div className="nav-item me-4 d-none d-lg-block" title="Orders">
-                    <p className="m-0 text-white fw-bold" onClick={() => navigate('/order-page')}>Orders</p>
+                    <p className="m-0 text-white fw-bold" onClick={() => {(currentUser) ? navigate('/order-page') : (navigate('/user/login'), toast.error("Login to See Orders"))}}>Orders</p>
                 </div>
 
                 <Link to={(currentUserId) ? `/cart/${currentUserId}` : "/user/login" } className="text-decoration-none" onClick={() => {(currentUserId)?null:toast.error("Log in to See Cart Items")}}>

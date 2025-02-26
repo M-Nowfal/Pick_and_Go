@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { context } from '../App';
+import { toast } from 'sonner';
 
 const Slider = (props) => {
 
@@ -32,8 +33,12 @@ const Slider = (props) => {
                 <hr />
                 <h6 className="fs-5 fw-bold">Orders & Carts</h6>
                 <ul className="list-unstyled p-2"  data-bs-dismiss="offcanvas">
-                    <li className="list-element"><Link to={(currentUserId) ? `/cart/${currentUserId}` : ""}className="text-reset text-decoration-none">Carts</Link></li>
-                    <li className="list-element" onClick={() => navigate('/order-page')}>Orders</li>
+                    <li className="list-element" onClick={() => {(currentUserId) ? navigate(`/cart/${currentUserId}`) : (navigate(`/user/login`),toast.error("Login to See Cart Items"))}}>
+                        Carts
+                    </li>
+                    <li className="list-element" onClick={() => {(currentUserId) ? navigate('/order-page') : (navigate('/user/login'), toast.error("Login to See Orders"))}}>
+                        Orders
+                    </li>
                 </ul>
                 <hr />
                 <h6 className="fs-5 fw-bold">Help & Settings</h6>

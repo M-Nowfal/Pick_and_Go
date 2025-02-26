@@ -9,7 +9,7 @@ import "../styles/cartItem.css";
 const CartItem = ({ item, setCart, setRender, render, setLocalCart, permisible, setPermisible }) => {
 
     const [count, setCount] = useState(item.quantity);
-    const { currentUserId } = useContext(context);
+    const { currentUserId, tryingToOrder } = useContext(context);
 
     const updateCart = (operation) => {
         axios.put(import.meta.env.VITE_API_URL + `/update-cart-qty?userId=${currentUserId}&id=${item._id}&ope=${operation}`)
@@ -57,7 +57,7 @@ const CartItem = ({ item, setCart, setRender, render, setLocalCart, permisible, 
                     <p className="text-secondary">
                         Quantity: <span className="text-primary fw-bold">{count}</span>
                     </p>
-                    <div className="w-75 mx-auto">
+                    {!tryingToOrder && <div className="w-75 mx-auto">
                         {
                             (count == 1) ? 
                             <button className="inc-dec-btn" disabled={!permisible}>
@@ -97,7 +97,7 @@ const CartItem = ({ item, setCart, setRender, render, setLocalCart, permisible, 
                                 }}
                             ></i>
                         </button>
-                    </div>
+                    </div>}
                 </div>
             </div>
         </div>
