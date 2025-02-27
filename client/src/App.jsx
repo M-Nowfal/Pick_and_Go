@@ -40,7 +40,7 @@ function App() {
 	return (
 
 		<BrowserRouter>
-			<Toaster position="top-center" richColors swipeDirections={["left", "right"]} />
+			<Toaster position="top-right" richColors swipeDirections={["left", "right"]} />
 			<context.Provider value={{ totalItems, setTotalItems, 
 										currentUserId, setCurrentUserId, 
 										setCurrentUser, cartItemsOrdered, 

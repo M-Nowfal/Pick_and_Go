@@ -61,6 +61,7 @@ const Account = () => {
                 });
                 localStorage.setItem("userName", response.data.user.name);
                 setCurrentUser(localStorage.getItem("userName"));
+                toast.success("User Details Updated Sucessfully");
                 setEditable(false);
             } else {
                 setEditable(false);
@@ -74,7 +75,10 @@ const Account = () => {
     return (
         userUpdates && <div className="d-flex justify-content-center align-items-center vh-100">
             <div className="container">
-                {!checkPass ? <div className="row bg-secondary-subtle shadow-lg rounded p-3 m-1">
+                <div className="d-flex justify-content-center">
+                    <i className="fa-solid fa-user-tie fs-1 user-logo" />
+                </div>
+                {!checkPass ? <div className="row user-update bg-secondary-subtle shadow-lg rounded p-3 m-1">
                     {!editable && <i className="fa-solid fa-ellipsis-vertical text-end" onClick={() => setCheckPass(true)}></i>}
                     <form onSubmit={(e) => { e.preventDefault(); updateUserInfo() }}>
                         <table>
@@ -89,7 +93,7 @@ const Account = () => {
                                 </tr>
                                 <tr>
                                     <th scope="row" className="p-2 fs-4">Phone</th>
-                                    <td><input type="number" className="update-input-field" required value={userUpdates.phone} onChange={(e) => handleUserUpdate("phone", e.target.value)} readOnly={!editable} /></td>
+                                    <td><input type="number" className="update-input-field disable-inc-dec-btn" required value={userUpdates.phone} onChange={(e) => handleUserUpdate("phone", e.target.value)} readOnly={!editable} /></td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="p-2 fs-4">E-mail</th>
@@ -106,7 +110,7 @@ const Account = () => {
                         </div>}
                     </form>
                 </div> :
-                    <div className="row bg-secondary-subtle shadow-lg rounded p-3 m-1">
+                    <div className="row check-password shadow-lg rounded p-3 m-1">
                         <form onSubmit={(e) => { e.preventDefault(); checkPassword(); }}>
                             <table>
                                 <thead>

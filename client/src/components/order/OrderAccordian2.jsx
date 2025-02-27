@@ -30,7 +30,7 @@ const OrderAccordian2 = ({ orderDetails, order, handleOrderDetails }) => {
                                 <label className="form-label" htmlFor="phone">Phone Number</label>
                                 <input
                                     type="number"
-                                    className={`form-control order-input-field ${!orderDetails.phone && order.current && "empty-field"}`}
+                                    className={`form-control order-input-field ${!orderDetails.phone && order.current && "empty-field"} disable-inc-dec-btn`}
                                     id="phone"
                                     value={orderDetails.phone}
                                     placeholder="Enter your phone number"

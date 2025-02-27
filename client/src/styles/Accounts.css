@@ -1,8 +1,88 @@
+/* Profile Card */
+.user-update {
+    border-radius: 15px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    padding: 20px;
+    color: #fff;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+}
+
+th {
+    text-align: left;
+    padding: 10px;
+    font-size: 1.2rem;
+}
+
+td {
+    padding: 10px;
+}
+
+/* Input Fields */
 .update-input-field {
+    width: 100%;
     border: none;
     border-radius: 10px;
-    padding: 5px;
-    box-shadow: inset 0px 0px 8px grey;
+    padding: 8px;
+    box-shadow: inset 0px 0px 8px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
     font-weight: 500;
     outline: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.update-input-field:focus {
+    box-shadow: inset 0px 0px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+}
+
+/* Buttons */
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-warning {
+    background: #ffcc00;
+    color: #000;
+}
+
+.btn-warning:hover {
+    background: #e6b800;
+    transform: scale(1.05);
+}
+
+/* Edit Icon */
+.fa-ellipsis-vertical {
+    float: right;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: white;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Password Check Box */
+.check-password {
+    display: flex;
+    justify-content: center;
+    color: white;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    align-items: center;
+    flex-direction: column;
+}
+.user-logo {
+    color: #764ba2;
+    font-size: 100px !important;
+    top: 150px;
+}
+.check-password input {
+    width: 80%;
+    margin-bottom: 10px;
 }
