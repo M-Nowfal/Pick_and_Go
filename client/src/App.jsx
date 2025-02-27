@@ -15,6 +15,8 @@ import Orders from './components/Orders';
 import UserAuth from './components/UserAuth';
 import Footer from './components/Footer';
 import OrderPage from './components/OrderPage';
+import CustomerCare from './components/CustomerCare';
+import Account from './components/Account';
 
 export const context = createContext(0);
 
@@ -56,6 +58,8 @@ function App() {
 							<Route path='/user/:auth' element={<UserAuth />} />
 							<Route path='/orders' element={<Orders />} />
 							<Route path='/order-page' element={<OrderPage />} />
+							<Route path='/customer-care' element={<CustomerCare />} />
+							<Route path='/getUser' element={<Account />} />
 							<Route path="*" element={<PageNotFound />} />
 						</Routes>
 					</div>

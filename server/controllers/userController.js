@@ -1,4 +1,4 @@
-import bcryptjs from "bcryptjs";
+import bcryptjs, { genSaltSync } from "bcryptjs";
 import userModel from "../models/userModel.js";
 
 //route  api/v1/user/sign-in
@@ -94,5 +94,50 @@ export const userLogOut = async (req, res, next) => {
     } catch (err) {
         console.log(err.message);
         return res.status(500).json({ message: "Internal server Error", success: false });
+    }
+}
+
+//route api/v1/getUser
+export const getUser = async (req, res, next) => {
+    try {
+        const { userId } = req.params;
+        const user = await userModel.findById(userId);
+        if (user) {
+            return res.status(200).json({ message: "user exists", success: true, user });
+        } else {
+            return res.status(201).json({ message: "user not exists", success: false });
+        }
+    } catch (err) {
+        return res.status(500).json({ message: "Internal Server Error", success: false });
+    }
+}
+
+//route api/v1/gwtUserPassword/:userId/:pass
+export const getUserPassword = async (req, res, next) => {
+    try {
+        const { userId, pass } = req.params;
+        const { password } = await userModel.findById(userId, { password: 1, _id: 0 });
+        if (bcryptjs.compareSync(pass, password)) {
+            return res.status(200).json({ message: "Success", success: true });
+        } else {
+            return res.status(201).json({ message: "Failed", success: false });
+        }
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ message: "Internal Server Error", success: false });
+    }
+}
+
+//route api/v1/update-user-details/:userId
+export const updateUserDetails = async (req, res, next) => {
+    try {
+        const { userId } = req.params;
+        const { userUpdates } = req.body;
+        userUpdates.password =  bcryptjs.hashSync(userUpdates.password, bcryptjs.genSaltSync(10));
+        const user = await userModel.findByIdAndUpdate( userId, {$set: userUpdates}, {new: true, runValidators: true} );
+        return res.status(200).json({message: "Updated Successfully", success: true, user });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({message: "Internal Server Error", success: false });
     }
 }

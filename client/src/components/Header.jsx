@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { context } from "../App";
 import { toast } from "sonner";
@@ -8,6 +8,13 @@ const Header = ({ currentUser }) => {
 
     const navigate = useNavigate();
     const { totalItems, currentUserId } = useContext(context);
+    const [searchProduct, setSearchProduct] = useState("");
+
+    function clearSession() {
+        if(searchProduct == "clear"){
+            localStorage.clear(); location.reload();
+        }
+    }
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -29,8 +36,8 @@ const Header = ({ currentUser }) => {
                             <option>Laptops</option>
                             <option>Dresses</option>
                         </select>
-                        <input type="text" className="form-control" id="search-product" placeholder="Search Product" />
-                        <button className="btn btn-warning  rounded-end">
+                        <input type="text" className="form-control" id="search-product" value={searchProduct} placeholder="Search Product" onChange={(e) => setSearchProduct(e.target.value)} />
+                        <button className="btn btn-warning  rounded-end" onClick={clearSession}>
                             <i className="fas fa-search" title="Search Products"></i>
                         </button>
                     </div>
