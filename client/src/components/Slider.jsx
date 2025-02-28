@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 
 const Slider = (props) => {
 
-    const { currentUserId } = useContext(context);
+    const { currentUserId, setCategory } = useContext(context);
     const navigate = useNavigate();
 
     return (
@@ -18,10 +18,10 @@ const Slider = (props) => {
             <div className="offcanvas-body">
                 <h6 className="fs-5 fw-bold">Shop by Department</h6>
                 <ul className="list-unstyled p-2"  data-bs-dismiss="offcanvas">
-                    <li className="list-element">Mobiles</li>
-                    <li className="list-element">Laptops</li>
-                    <li className="list-element">Dresses</li>
-                    <li className="list-element">Others</li>
+                    <li className="list-element" onClick={() => setCategory("mobile")}>Mobiles</li>
+                    <li className="list-element" onClick={() => setCategory("laptop")}>Laptops</li>
+                    <li className="list-element" onClick={() => setCategory("other")}>Others</li>
+                    <li className="list-element" onClick={() => setCategory("all")}>All</li>
                 </ul>
                 <hr />
                 <h6 className="fs-5 fw-bold">Orders & Carts</h6>
@@ -37,9 +37,9 @@ const Slider = (props) => {
                 <h6 className="fs-5 fw-bold">Help & Settings</h6>
                 <ul className="list-unstyled p-2"  data-bs-dismiss="offcanvas">
                     <li className="list-element" onClick={() => {currentUserId ? navigate('/getUser') : (navigate('/user/login'), toast.error("Login to see account details"))}}><i className="fa-solid fa-user-tie text-secondary" /> Your Account</li>
-                    <li className="list-element"><i className="fa-solid fa-globe text-secondary" /> English</li>
+                    <li className="list-element" onClick={() => navigate('/language')}><i className="fa-solid fa-globe text-secondary" /> English</li>
                     <li className="list-element" onClick={() => navigate('/customer-care')} >Customer Service</li>
-                    <li className="list-element">Seller</li>
+                    <li className="list-element" onClick={() => navigate('/seller')} >Seller</li>
                     {!currentUserId && <li className="list-element" onClick={() => navigate('/user/login')}>Log In</li>}
                     {currentUserId && <li className="list-element" onClick={() => navigate('/user/logout')}>Log Out</li>}
                     {currentUserId && <li className="list-element" onClick={() => navigate('/user/signout')}>Sign Out</li>}

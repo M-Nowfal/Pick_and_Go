@@ -89,19 +89,19 @@ const Account = () => {
                             <tbody>
                                 <tr>
                                     <th scope="row" className="p-2 fs-4">Name</th>
-                                    <td><input type="text" className="update-input-field" required value={userUpdates.name} onChange={(e) => handleUserUpdate("name", e.target.value)} readOnly={!editable} /></td>
+                                    <td><input type="text" className="update-input-field" id="accname" required value={userUpdates.name} onChange={(e) => handleUserUpdate("name", e.target.value)} readOnly={!editable} /></td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="p-2 fs-4">Phone</th>
-                                    <td><input type="number" className="update-input-field disable-inc-dec-btn" required value={userUpdates.phone} onChange={(e) => handleUserUpdate("phone", e.target.value)} readOnly={!editable} /></td>
+                                    <td><input type="number" className="update-input-field disable-inc-dec-btn" id="accphone" required value={userUpdates.phone} onChange={(e) => handleUserUpdate("phone", e.target.value)} readOnly={!editable} /></td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="p-2 fs-4">E-mail</th>
-                                    <td><input type="email" className="update-input-field" required value={userUpdates.email} onChange={(e) => handleUserUpdate("email", e.target.value)} readOnly={!editable} /></td>
+                                    <td><input type="email" className="update-input-field" id="accemail" required value={userUpdates.email} onChange={(e) => handleUserUpdate("email", e.target.value)} readOnly={!editable} /></td>
                                 </tr>
                                 <tr>
                                     <th scope="row" className="p-2 fs-4">Password</th>
-                                    <td><input type="password" className="update-input-field" required minLength={6} maxLength={10} value={userUpdates.password} onChange={(e) => handleUserUpdate("password", e.target.value)} readOnly={!editable} /></td>
+                                    <td><input type="password" className="update-input-field" id="accpass" required minLength={6} maxLength={10} value={userUpdates.password} onChange={(e) => handleUserUpdate("password", e.target.value)} readOnly={!editable} /></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -120,7 +120,7 @@ const Account = () => {
                                 <tbody>
                                     <tr>
                                         <th scope="row" className="p-2 fs-4">Password</th>
-                                        <td><input type="text" className="update-input-field" value={userUpdates.password} required onChange={(e) => handleUserUpdate("password", e.target.value)} /></td>
+                                        <td><input type="text" className="update-input-field" id="pass" value={userUpdates.password} required onChange={(e) => handleUserUpdate("password", e.target.value)} /></td>
                                     </tr>
                                 </tbody>
                             </table>

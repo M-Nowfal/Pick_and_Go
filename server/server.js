@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 
 const corsOptions = {
-    origin: "https://pick-and-go-lovat.vercel.app",
+    origin: process.env.ORIGIN_URL,
     methods: "GET, HEAD, PUT, DELETE, POST, PATCH",
     credentials: true
 };
