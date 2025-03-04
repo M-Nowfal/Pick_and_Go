@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { context } from '../App';
 import { toast } from 'sonner';
 
-const Slider = (props) => {
+const Slider = ({ currentUser }) => {
 
     const { currentUserId, setCategory } = useContext(context);
     const navigate = useNavigate();
@@ -12,7 +12,7 @@ const Slider = (props) => {
         <div className="offcanvas offcanvas-start bg-light" data-bs-scroll="true" tabIndex="-1" id="slider" aria-labelledby="offcanvasExampleLabel">
             <div className="offcanvas-header bg-dark">
                 <i className="fa-solid fa-user-tie text-white fs-4" />&nbsp;&nbsp;
-                <h5 className="offcanvas-title session-loged-in fs-3 text-warning" id="offcanvasExampleLabel">{(props.currentUser)?props.currentUser:"Guest"}</h5>
+                <h5 className="offcanvas-title session-loged-in fs-3 text-warning" id="offcanvasExampleLabel">{(currentUserId) ? currentUser:"Guest"}</h5>
                 <button type="button" className="btn-close text-reset text-bg-danger" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div className="offcanvas-body">
@@ -39,10 +39,10 @@ const Slider = (props) => {
                     <li className="list-element" onClick={() => {currentUserId ? navigate('/getUser') : (navigate('/user/login'), toast.error("Login to see account details"))}}><i className="fa-solid fa-user-tie text-secondary" /> Your Account</li>
                     <li className="list-element" onClick={() => navigate('/language')}><i className="fa-solid fa-globe text-secondary" /> English</li>
                     <li className="list-element" onClick={() => navigate('/customer-care')} >Customer Service</li>
-                    <li className="list-element" onClick={() => navigate('/seller')} >Seller</li>
+                    {!localStorage.getItem("sellerId") && <li className="list-element" onClick={() => navigate('/seller')} >Seller</li>}
                     {!currentUserId && <li className="list-element" onClick={() => navigate('/user/login')}>Log In</li>}
-                    {currentUserId && <li className="list-element" onClick={() => navigate('/user/logout')}>Log Out</li>}
-                    {currentUserId && <li className="list-element" onClick={() => navigate('/user/signout')}>Sign Out</li>}
+                    {currentUserId && <li className="list-element" onClick={() => {localStorage.getItem("userId") ? navigate('/user/logout') : navigate('/seller/logout') }}>Log Out</li>}
+                    {currentUserId && <li className="list-element" onClick={() => {localStorage.getItem("userId") ? navigate('/user/signout') : navigate('/seller/signout') }}>Sign Out</li>}
                 </ul>
             </div>
         </div>

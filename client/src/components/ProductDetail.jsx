@@ -80,22 +80,22 @@ const ProductDetail = () => {
                                     <h6 className="ratings-num text-secondary">{product.ratings}</h6>
                                     <h5><span className="fs-6">Brand</span> {product.brand}</h5>
                                     {
-                                        product.stock == 0 ? <h6 className="text-danger">Out of Stock</h6>
+                                        product.stock <= 0 ? <h6 className="text-danger">Out of Stock</h6>
                                             : <h6>Available Stock <span className="text-success">{product.stock}</span></h6>
                                     }
                                     <h5>
                                         <span className="text-secondary">INR </span>
                                         <sup className="text-danger">₹</sup>{product.price}
                                     </h5>
-                                    <div className={`d-flex justify-content-center ${!product.stock ? "d-none" : "d-block"}`}>
+                                    <div className={`d-flex justify-content-center ${product.stock <= 0 ? "d-none" : "d-block"}`}>
                                         <h6>
                                             <i className="fa-solid fa-circle-minus text-danger fs-5 cursor" onClick={() => count > 1 && setCount(count - 1)}></i>
                                             &nbsp;&nbsp;Quantity : {count}&nbsp;&nbsp;
                                             <i className="fa-solid fa-circle-plus text-success fs-5 cursor" onClick={() => count < product.stock && setCount(count + 1)}></i>
                                         </h6>
                                     </div>
-                                    <button className="btn btn-warning m-2 w-50 shadow" disabled={!product.stock} onClick={() => (currentUserId) ? addToCart() : toast.error("Login to add Products to Cart")}>Add to Cart</button>
-                                    <button className="btn btn-warning m-2 w-50 shadow" disabled={!product.stock} onClick={() => (currentUserId) ? navigate(`/orders/?single=true&productId=${id}&qty=${count}`) : (toast.error("Login to add Products to Cart"), navigate('/user/login'))}>Buy Now</button>
+                                    <button className="btn btn-warning m-2 w-50 shadow" disabled={product.stock <= 0 ? true : false} onClick={() => (currentUserId) ? addToCart() : toast.error("Login to add Products to Cart")}>Add to Cart</button>
+                                    <button className="btn btn-warning m-2 w-50 shadow" disabled={product.stock <= 0 ? true : false} onClick={() => (currentUserId) ? navigate(`/orders/?single=true&productId=${id}&qty=${count}`) : (toast.error("Login to add Products to Cart"), navigate('/user/login'))}>Buy Now</button>
                                 </div>
                             </div>
                         </div>

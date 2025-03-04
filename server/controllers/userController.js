@@ -132,9 +132,9 @@ export const getUserPassword = async (req, res, next) => {
 export const updateUserDetails = async (req, res, next) => {
     try {
         const { userId } = req.params;
-        const { userUpdates } = req.body;
-        userUpdates.password =  bcryptjs.hashSync(userUpdates.password, bcryptjs.genSaltSync(10));
-        const user = await userModel.findByIdAndUpdate( userId, {$set: userUpdates}, {new: true, runValidators: true} );
+        const { updates } = req.body;
+        const password =  bcryptjs.hashSync(updates.password, bcryptjs.genSaltSync(10));
+        const user = await userModel.findByIdAndUpdate( userId, {$set: {name: updates.name, phone: updates.phone, email: updates.email, password }}, {new: true, runValidators: true} );
         return res.status(200).json({message: "Updated Successfully", success: true, user });
     } catch (err) {
         console.log(err);

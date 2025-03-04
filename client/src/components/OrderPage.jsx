@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { toast } from "sonner";
 import OrderedItems from './order/OrderedItems';
+import Loader from './Loader';
 
 const OrderPage = () => {
 
@@ -27,7 +28,7 @@ const OrderPage = () => {
 
     return (
         localStorage.getItem("userName") && <div className="ordered-product-container">
-            {orders?.slice().reverse().map((item, index) =>
+            {!orders ? <Loader /> : orders.slice().reverse().map((item, index) =>
             item && item._id ? (
                 <OrderedItems
                     key={item._id}

@@ -19,6 +19,8 @@ import CustomerCare from './components/CustomerCare';
 import Account from './components/Account';
 import Language from './components/Language';
 import Seller from './components/Seller';
+import SellerAuth from './components/SellerAuth';
+import SellerViewPage from './components/seller-components/SellerViewPage';
 
 export const context = createContext(0);
 
@@ -36,20 +38,23 @@ function App() {
 	useEffect(() => {
 		const storedUser = localStorage.getItem("userName");
 		const storedUserId = localStorage.getItem("userId");
-		if (storedUser) setCurrentUser(storedUser);
-		if (storedUserId) setCurrentUserId(storedUserId);
+		const storedSeller = localStorage.getItem("sellerName");
+		const storedSellerId = localStorage.getItem("sellerId");
+		if (storedUser || storedSeller) setCurrentUser(storedUser || storedSeller);
+		if (storedUserId || storedSeller) setCurrentUserId(storedUserId || storedSellerId);
 	}, []);
 
 	return (
 
 		<BrowserRouter>
-			<Toaster position="top-right" richColors swipeDirections={["left", "right"]} />
-			<context.Provider value={{ totalItems, setTotalItems, 
-										currentUserId, setCurrentUserId, 
-										setCurrentUser, cartItemsOrdered, 
-										setCartItemsOrdered, tryingToOrder, 
-										setTryingToOrder , category,  setCategory
-									}}>
+			<Toaster position="top-center" richColors swipeDirections={["left", "right"]} />
+			<context.Provider value={{
+				totalItems, setTotalItems,
+				currentUserId, setCurrentUserId,
+				setCurrentUser, cartItemsOrdered,
+				setCartItemsOrdered, tryingToOrder,
+				setTryingToOrder, category, setCategory
+			}}>
 				<Header currentUser={currentUser} />
 				<Slider currentUser={currentUser} />
 				<div className="main-container">
@@ -65,6 +70,8 @@ function App() {
 							<Route path='/getUser' element={<Account />} />
 							<Route path='/language' element={<Language />} />
 							<Route path='/seller' element={<Seller />} />
+							<Route path='/seller/:auth' element={<SellerAuth />} />
+							<Route path='/seller/viewpage' element={<SellerViewPage />} />
 							<Route path="*" element={<PageNotFound />} />
 						</Routes>
 					</div>

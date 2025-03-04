@@ -12,7 +12,7 @@ const Header = ({ currentUser }) => {
 
     function clearSession() {
         if(searchProduct == "clear"){
-            localStorage.clear(); location.reload();
+            localStorage.clear(); navigate('/');
         }
     }
 
@@ -24,7 +24,7 @@ const Header = ({ currentUser }) => {
                     <i className="fa-solid fa-bars text-warning fs-3"></i>
                 </div>
 
-                <Link className="navbar-brand me-3" to="/">
+                <Link className="navbar-brand me-3" to={`${localStorage.getItem("sellerId") ? "/seller/viewpage" : "/" }`}>
                     <img src="/Pick&Go.png" alt="pick_and_go Logo" className="pick_and_go-logo" title="Pick&Go" />
                 </Link>
 
@@ -43,23 +43,23 @@ const Header = ({ currentUser }) => {
                     </div>
                 </div>
 
-                <div className="nav-item me-4 d-lg-block current-login d-flex" onClick={() => !currentUser && navigate('/user/login')} title="Accounts">
+                <div className="nav-item me-4 d-lg-block current-login d-flex" onClick={() => !currentUser ? navigate('/user/login') : navigate('/getUser')} title="Accounts">
                     <i className="fa-solid fa-user-tie text-white fs-4" />&nbsp;&nbsp;
                     <p className="m-0 text-white fw-bold">{(currentUser) ? currentUser:"Accounts"}</p>
                 </div>
 
                 <div className="nav-item me-4 d-none d-lg-block" title="Orders">
-                    <p className="m-0 text-white fw-bold" onClick={() => {(currentUser) ? navigate('/order-page') : (navigate('/user/login'), toast.error("Login to See Orders"))}}>Orders</p>
+                    <p className="m-0 text-white fw-bold" onClick={() => {localStorage.getItem("sellerId") ? navigate('/seller/orderpage') : localStorage.getItem("userId") ? navigate('/order-page') : navigate('/user/login')}}>Orders</p>
                 </div>
 
-                <Link to={(currentUserId) ? `/cart/${currentUserId}` : "/user/login" } className="text-decoration-none" onClick={() => {(currentUserId)?null:toast.error("Log in to See Cart Items")}}>
+                {localStorage.getItem("userId") && <Link to={(currentUserId) ? `/cart/${currentUserId}` : "/user/login" } className="text-decoration-none" onClick={() => {(currentUserId)?null:toast.error("Log in to See Cart Items")}}>
                     <div className="cart-container" title="Cart">
                         <div className="nav-item cart">
                             <i className="fas fa-shopping-cart text-white fs-4"></i>
                             <span className="total-cart-item badge bg-warning text-black fw-bold">{totalItems}</span>
                         </div>
                     </div>
-                </Link>
+                </Link>}
             </div>
         </nav>
     );

@@ -39,7 +39,8 @@ const OrderedItems = ({ orders, reloadOrders, setReloadOrders }) => {
                     </div>
                     <div className="col-6 col-md-4">
                         <div className="fs-4 text-white fw-bold">TOTAL</div>
-                        <div className="fs-6 fw-bold text-white">{orders.totalAmount}</div>
+                        {orders.totalAmount < 500 && <div className="fs-6 fw-bold text-white">Deliver fee <sup className="text-danger">₹</sup>40</div>}
+                        <div className="fs-6 fw-bold text-warning">{(orders.totalAmount < 500 ? orders.totalAmount + 40 : orders.totalAmount)}</div>
                     </div>
                     <div className="d-none d-md-block col-md-4">
                         <div className="fs-4 text-white fw-bold">SHIP TO</div>

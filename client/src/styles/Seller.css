@@ -1,0 +1,38 @@
+.seller-form {
+	border: solid 1px black;
+	border-radius: 20px;
+}
+
+.seller-input-field {
+	background-color: rgb(255, 247, 236);
+	box-shadow: inset 0px 0px 10px black;
+	width: 100%;
+	padding: 7px;
+	border-radius: 5px;
+	border: none;
+	outline: none;
+}
+
+.seller-input-field::-webkit-outer-spin-button,
+.seller-input-field::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.seller-label-field {
+	padding: 5px;
+	margin: 2px;
+	font-weight: bold;
+	font-size: large;
+	border-radius: 5px;
+	border: none;
+}
+
+.add-product-btn {
+	right: 20px;
+	top: 120px;
+}
+
+.add-product-btn i {
+	font-size: 50px !important;
+}

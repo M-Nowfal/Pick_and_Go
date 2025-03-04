@@ -26,3 +26,7 @@
 .content {
 	flex-grow: 1;
 }
+
+.margin-top {
+	margin-top: 125px;
+}
