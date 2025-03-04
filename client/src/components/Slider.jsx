@@ -29,7 +29,7 @@ const Slider = ({ currentUser }) => {
                     {localStorage.getItem("userId") && <li className="list-element" onClick={() => {(currentUserId) ? navigate(`/cart/${currentUserId}`) : (navigate(`/user/login`),toast.error("Login to See Cart Items"))}}>
                         Carts
                     </li>}
-                    <li className="list-element" onClick={() => {(currentUserId) ? navigate('/order-page') : (navigate('/user/login'), toast.error("Login to See Orders"))}}>
+                    <li className="list-element" onClick={() => {(localStorage.getItem("userId")) ? navigate('/order-page') : localStorage.getItem("sellerId") ? navigate('/seller/orderpage') : (navigate('/user/login'), toast.error("Login to See Orders"))}}>
                         Orders
                     </li>
                 </ul>
