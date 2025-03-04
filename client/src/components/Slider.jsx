@@ -26,9 +26,9 @@ const Slider = ({ currentUser }) => {
                 <hr />
                 <h6 className="fs-5 fw-bold">Orders & Carts</h6>
                 <ul className="list-unstyled p-2"  data-bs-dismiss="offcanvas">
-                    <li className="list-element" onClick={() => {(currentUserId) ? navigate(`/cart/${currentUserId}`) : (navigate(`/user/login`),toast.error("Login to See Cart Items"))}}>
+                    {localStorage.getItem("userId") && <li className="list-element" onClick={() => {(currentUserId) ? navigate(`/cart/${currentUserId}`) : (navigate(`/user/login`),toast.error("Login to See Cart Items"))}}>
                         Carts
-                    </li>
+                    </li>}
                     <li className="list-element" onClick={() => {(currentUserId) ? navigate('/order-page') : (navigate('/user/login'), toast.error("Login to See Orders"))}}>
                         Orders
                     </li>
