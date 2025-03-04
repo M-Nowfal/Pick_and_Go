@@ -105,49 +105,49 @@ const SellerSignin = () => {
                                         value={sellerDetails.business.businessName}
                                         autoComplete="off"
                                         onChange={(e) => handleBusinessDetails("businessName", e.target.value)}
-                                        required
+                                        required={!visible}
                                     />
                                     <label htmlFor="street" className="seller-label-field">Street</label>
                                     <input type="text" id="street" className="seller-input-field" placeholder="Enter your Business Location Street"
                                         value={sellerDetails.business.street}
                                         autoComplete="off"
                                         onChange={(e) => handleBusinessDetails("street", e.target.value)}
-                                        required
+                                        required={!visible}
                                     />
                                     <label htmlFor="city" className="seller-label-field">City</label>
                                     <input type="text" id="city" className="seller-input-field" placeholder="Enter your Business Location City"
                                         value={sellerDetails.business.city}
                                         autoComplete="off"
                                         onChange={(e) => handleBusinessDetails("city", e.target.value)}
-                                        required
+                                        required={!visible}
                                     />
                                     <label htmlFor="state" className="seller-label-field">State</label>
                                     <input type="text" id="state" className="seller-input-field" placeholder="Enter your Business Location State"
                                         value={sellerDetails.business.state}
                                         autoComplete="off"
                                         onChange={(e) => handleBusinessDetails("state", e.target.value)}
-                                        required
+                                        required={!visible}
                                     />
                                     <label htmlFor="pincode" className="seller-label-field">Pincode</label>
                                     <input type="text" id="pincode" className="seller-input-field" placeholder="Enter your Business Location Pincode"
                                         value={sellerDetails.business.pincode}
                                         autoComplete="off"
                                         onChange={(e) => handleBusinessDetails("pincode", e.target.value)}
-                                        required
+                                        required={!visible}
                                     />
                                     <label htmlFor="type" className="seller-label-field">Business Type</label>
                                     <input type="text" id="type" className="seller-input-field" placeholder="Enter your Business Type"
                                         value={sellerDetails.business.type}
                                         autoComplete="off"
                                         onChange={(e) => handleBusinessDetails("type", e.target.value)}
-                                        required
+                                        required={!visible}
                                     />
                                     <label htmlFor="tax-id" className="seller-label-field">Tax-ID</label>
                                     <input type="text" id="tax-id" className="seller-input-field" placeholder="Enter your Business Tax-ID"
                                         value={sellerDetails.business.taxId}
                                         autoComplete="off"
                                         onChange={(e) => handleBusinessDetails("taxId", e.target.value)}
-                                        required
+                                        required={!visible}
                                     />
                                 </div>
                                 <div className="text-center mt-2">
