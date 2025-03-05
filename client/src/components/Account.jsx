@@ -53,7 +53,7 @@ const Account = () => {
         setUpdates(prev => ({
             ...prev,
             businessAddress: {
-                ...businessAddress,
+                ...prev.businessAddress,
                 [key]: val
             }
         }));

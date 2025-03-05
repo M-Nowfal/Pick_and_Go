@@ -21,6 +21,7 @@ import Language from './components/Language';
 import Seller from './components/Seller';
 import SellerAuth from './components/SellerAuth';
 import SellerViewPage from './components/seller-components/SellerViewPage';
+import UpdateProduct from './components/seller-components/UpdateProduct';
 
 export const context = createContext(0);
 
@@ -44,17 +45,19 @@ function App() {
 		if (storedUserId || storedSeller) setCurrentUserId(storedUserId || storedSellerId);
 	}, []);
 
+	const contextValues = {
+		totalItems, setTotalItems,
+		currentUserId, setCurrentUserId,
+		setCurrentUser, cartItemsOrdered,
+		setCartItemsOrdered, tryingToOrder,
+		setTryingToOrder, category, setCategory
+	}
+
 	return (
 
 		<BrowserRouter>
 			<Toaster position="top-center" richColors swipeDirections={["left", "right"]} />
-			<context.Provider value={{
-				totalItems, setTotalItems,
-				currentUserId, setCurrentUserId,
-				setCurrentUser, cartItemsOrdered,
-				setCartItemsOrdered, tryingToOrder,
-				setTryingToOrder, category, setCategory
-			}}>
+			<context.Provider value={ contextValues }>
 				<Header currentUser={currentUser} />
 				<Slider currentUser={currentUser} />
 				<div className="main-container">
@@ -72,6 +75,7 @@ function App() {
 							<Route path='/seller' element={<Seller />} />
 							<Route path='/seller/:auth' element={<SellerAuth />} />
 							<Route path='/seller/viewpage' element={<SellerViewPage />} />
+							<Route path='/seller/update-product/:productId' element={<UpdateProduct />} />
 							<Route path="*" element={<PageNotFound />} />
 						</Routes>
 					</div>

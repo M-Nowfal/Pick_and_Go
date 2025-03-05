@@ -3,7 +3,7 @@ import { userSignIn, userSignOut, userLogIn, userLogOut, getUser, getUserPasswor
 import { getProducts, getSingleProduct } from '../controllers/productController.js';
 import { addToCart, deleteCart, deleteCartProduct, getCart, updateCart } from '../controllers/cartController.js';
 import { placeOrder, getOrders, deleteOrder } from '../controllers/orderController.js';
-import { getSeller, getSellerPassword, sellerLogin, sellerLogout, sellerSignIn, sellerSignOut, sellerView, updateSellerDetails } from '../controllers/sellerController.js';
+import { getSeller, getSellerPassword, sellerLogin, sellerLogout, sellerSignIn, sellerSignOut, sellerView, upDateProduct, updateSellerDetails } from '../controllers/sellerController.js';
 
 const router = Router();
 
@@ -45,5 +45,6 @@ router.route('/update-seller-details/:sellerId').put(updateSellerDetails);
 router.route('/seller/view/:sellerId').get(sellerView);
 router.route('/seller/add-product').post();
 router.route('/seller/remove-product').delete();
+router.route('/seller/update-product').put(upDateProduct);
 
 export default router;

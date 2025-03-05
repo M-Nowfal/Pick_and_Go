@@ -7,12 +7,14 @@ import "../styles/header.css";
 const Header = ({ currentUser }) => {
 
     const navigate = useNavigate();
-    const { totalItems, currentUserId } = useContext(context);
+    const { totalItems, currentUserId, setCurrentUser } = useContext(context);
     const [searchProduct, setSearchProduct] = useState("");
 
     function clearSession() {
         if(searchProduct == "clear"){
-            localStorage.clear(); navigate('/');
+            localStorage.clear(); 
+            setCurrentUser(null);
+            navigate('/');
         }
     }
 

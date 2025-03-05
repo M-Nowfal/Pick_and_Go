@@ -168,3 +168,19 @@ export const sellerView = async (req, res, next) => {
         return res.status(500).json({ message: "Internal Server Error", success: false });
     }
 }
+
+//route api/v1/seller/update-product/:productId
+export const upDateProduct = async (req, res, next) => {
+    try {
+        const { id, name, price, description, stock, brand, category, image1, image2, image3 } = req.body.updatedProduct;
+        const product = await productModel.findByIdAndUpdate(id, {
+            $set: {
+                name, price, description, stock, brand, category, images: [image1, image2, image3]
+            }
+        });
+        return res.status(200).json({ message: "Product Updated Successfully", success: true });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ message: "Internal Server Error", success: false });
+    }
+}
