@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { userSignIn, userSignOut, userLogIn, userLogOut, getUser, getUserPassword, updateUserDetails } from '../controllers/userController.js';
-import { getProducts, getSingleProduct } from '../controllers/productController.js';
+import { addProduct, getProducts, getSingleProduct, removeProduct, upDateProduct } from '../controllers/productController.js';
 import { addToCart, deleteCart, deleteCartProduct, getCart, updateCart } from '../controllers/cartController.js';
-import { placeOrder, getOrders, deleteOrder } from '../controllers/orderController.js';
-import { addProduct, getSeller, getSellerPassword, removeProduct, sellerLogin, sellerLogout, sellerSignIn, sellerSignOut, sellerView, upDateProduct, updateSellerDetails } from '../controllers/sellerController.js';
+import { placeOrder, getOrders, deleteOrder, getSellerOrders } from '../controllers/orderController.js';
+import { getSeller, getSellerPassword, sellerLogin, sellerLogout, sellerSignIn, sellerSignOut, sellerView, updateSellerDetails } from '../controllers/sellerController.js';
 
 const router = Router();
 
@@ -46,5 +46,6 @@ router.route('/seller/view/:sellerId').get(sellerView);
 router.route('/seller/add-product').post(addProduct);
 router.route('/seller/remove-product/:productId').delete(removeProduct);
 router.route('/seller/update-product').put(upDateProduct);
+router.route('/seller/get-orders/:sellerId').get(getSellerOrders);
 
 export default router;

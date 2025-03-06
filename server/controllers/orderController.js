@@ -93,3 +93,24 @@ export const deleteOrder = async (req, res, next) => {
         return res.status(500).json({ message: "Internal Server Error", success: false });
     }
 }
+
+//route api/v1/seller/get-orders/:sellerId
+export const getSellerOrders = async (req, res, next) => {
+    try {
+        const { sellerId } = req.params;
+        const orders = await orderModel.find({})
+            .populate({
+                path: "products.productId",
+                select: "sellerId name"
+            });
+        const filteredOrders = orders.filter(order =>
+            order.products.some(product =>
+                product.productId?.sellerId?.toString() === sellerId
+            )
+        );
+        return res.status(200).json({ success: true, orders: filteredOrders });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ message: "Internal Server Error", success: false });
+    }
+}
