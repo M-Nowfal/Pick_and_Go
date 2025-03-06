@@ -26,7 +26,7 @@ const Header = ({ currentUser }) => {
                     <i className="fa-solid fa-bars text-warning fs-3"></i>
                 </div>
 
-                <Link className="navbar-brand me-3" to={`${localStorage.getItem("sellerId") ? "/seller/viewpage" : "/" }`}>
+                <Link className="navbar-brand me-3" to="/">
                     <img src="/Pick&Go.png" alt="pick_and_go Logo" className="pick_and_go-logo" title="Pick&Go" />
                 </Link>
 

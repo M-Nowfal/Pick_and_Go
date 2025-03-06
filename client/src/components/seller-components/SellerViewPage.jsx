@@ -60,7 +60,7 @@ const SellerViewPage = () => {
                         </tbody>
                     </table>
                     <div className="position-fixed add-product-btn">
-                        <i className="fa-solid fa-circle-plus text-warning fs-1 cursor"></i>
+                        <i className="fa-solid fa-circle-plus text-warning fs-1 cursor" onClick={() => navigate('/seller/add-product')}></i>
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@ const SellerViewPage = () => {
                 <div className="row text-center">
                     <h1 className="fs-1 fw-bold">No Products Added</h1>
                     <div className="text-center">
-                        <button className="btn btn-warning shadow">Add Product</button>
+                        <button className="btn btn-warning shadow" onClick={() => navigate('/seller/add-product')}>Add Product</button>
                     </div>
                 </div>
             </div>

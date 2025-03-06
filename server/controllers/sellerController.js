@@ -157,7 +157,7 @@ export const updateSellerDetails = async (req, res, next) => {
 export const sellerView = async (req, res, next) => {
     try {
         const { sellerId } = req.params;
-        const products = await productModel.find({ seller: sellerId });
+        const products = await productModel.find({ sellerId });
         if (products) {
             return res.status(200).json({ message: "Products Fetched", success: true, products });
         } else {
@@ -169,7 +169,31 @@ export const sellerView = async (req, res, next) => {
     }
 }
 
-//route api/v1/seller/update-product/:productId
+//route api/v1/seller/add-product
+export const addProduct = async (req, res, next) => {
+    try {
+        const { name, price, description, stock, brand, category, image1, image2, image3, sellerId, ratings } = req.body.productDetails;
+        if (image1 && image2 && image3) {
+            await productModel.create({
+                name, description, price, category, images: [image1, image2, image3], brand, stock, sellerId, ratings
+            });
+        } else if (image1 && image2) {
+            await productModel.create({
+                name, description, price, category, images: [image1, image2], brand, stock, sellerId, ratings
+            });
+        } else {
+            await productModel.create({
+                name, description, price, category, images: [image1], brand, stock, sellerId, ratings
+            });
+        }
+        return res.status(200).json({ message: "Product Added Successfully", success: true });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ message: "Internal Server Error", success: false });
+    }
+}
+
+//route api/v1/seller/update-product
 export const upDateProduct = async (req, res, next) => {
     try {
         const { id, name, price, description, stock, brand, category, image1, image2, image3 } = req.body.updatedProduct;
@@ -179,6 +203,18 @@ export const upDateProduct = async (req, res, next) => {
             }
         });
         return res.status(200).json({ message: "Product Updated Successfully", success: true });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ message: "Internal Server Error", success: false });
+    }
+}
+
+//route api/v1/seller/remove-product/:productId
+export const removeProduct = async (req, res, next) => {
+    try {
+        const { productId } = req.params;
+        await productModel.findByIdAndDelete(productId);
+        return res.status(200).json({ message: "Product Deleted Successfully", success: true });
     } catch (err) {
         console.log(err);
         return res.status(500).json({ message: "Internal Server Error", success: false });
