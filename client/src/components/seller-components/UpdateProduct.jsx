@@ -102,9 +102,9 @@ const UpdateProduct = () => {
                     <input type="text" className="form-control my-2" name="image2" value={updatedProduct.image2} onChange={handleChange} />
                     <input type="text" className="form-control my-2" name="image3" value={updatedProduct.image3} onChange={handleChange} />
                     <div className="mt-2 text-center">
-                        <img src={updatedProduct.image1} className="mx-5 my-3" alt="Product Preview" style={{ width: "200px", height: "200px", objectFit: "contain" }} />
-                        <img src={updatedProduct.image2} className="mx-5 my-3" alt="Product Preview" style={{ width: "200px", height: "200px", objectFit: "contain" }} />
-                        <img src={updatedProduct.image3} className="mx-5 my-3" alt="Product Preview" style={{ width: "200px", height: "200px", objectFit: "contain" }} />
+                        {updatedProduct.image1 && <img src={updatedProduct.image1} className="mx-5 my-3" alt="Product Preview" style={{ width: "200px", height: "200px", objectFit: "contain" }} />}
+                        {updatedProduct.image2 && <img src={updatedProduct.image2} className="mx-5 my-3" alt="Product Preview" style={{ width: "200px", height: "200px", objectFit: "contain" }} />}
+                        {updatedProduct.image3 && <img src={updatedProduct.image3} className="mx-5 my-3" alt="Product Preview" style={{ width: "200px", height: "200px", objectFit: "contain" }} />}
                     </div>
                 </div>
                 <div className="text-center">
