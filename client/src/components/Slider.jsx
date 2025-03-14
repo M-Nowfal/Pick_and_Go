@@ -26,13 +26,13 @@ const Slider = ({ currentUser }) => {
                 <hr />
                 {localStorage.getItem("userId") ? <h6 className="fs-5 fw-bold">Orders & Carts</h6> : <h6 className="fs-5 fw-bold">Products & Orders</h6>}
                 <ul className="list-unstyled p-2" data-bs-dismiss="offcanvas">
-                    {localStorage.getItem("userId") ? (<li className="list-element" onClick={() => { (currentUserId) ? navigate(`/cart/${currentUserId}`) : (navigate(`/user/login`), toast.error("Login to See Cart Items")) }}>
-                        Carts
-                    </li>) : (
+                    {localStorage.getItem("sellerId") ? (
                         <li className="list-element" onClick={() => { (currentUserId) ? navigate(`/seller/viewpage`) : (navigate(`/seller/login`), toast.error("Login to See Seller Products")) }}>
                             Products
                         </li>
-                    )}
+                    ) : (<li className="list-element" onClick={() => { (currentUserId) ? navigate(`/cart/${currentUserId}`) : (navigate(`/user/login`), toast.error("Login to See Cart Items")) }}>
+                        Carts
+                    </li>)}
                     <li className="list-element" onClick={() => { (localStorage.getItem("userId")) ? navigate('/order-page') : localStorage.getItem("sellerId") ? navigate('/seller/orderpage') : (navigate('/user/login'), toast.error("Login to See Orders")) }}>
                         Orders
                     </li>
