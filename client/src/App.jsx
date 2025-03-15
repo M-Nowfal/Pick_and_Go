@@ -22,6 +22,7 @@ import Seller from './components/Seller';
 import SellerAuth from './components/SellerAuth';
 import SellerViewPage from './components/seller-components/SellerViewPage';
 import UpdateProduct from './components/seller-components/UpdateProduct';
+import AdminViewPage from './components/admin-components/AdminViewPage';
 
 export const context = createContext(0);
 
@@ -76,6 +77,7 @@ function App() {
 							<Route path='/seller/:auth' element={<SellerAuth />} />
 							<Route path='/seller/viewpage' element={<SellerViewPage />} />
 							<Route path='/seller/update-product/:productId' element={<UpdateProduct />} />
+							<Route path='/admin/:view' element={<AdminViewPage />} />
 							<Route path="*" element={<PageNotFound />} />
 						</Routes>
 					</div>

@@ -42,6 +42,7 @@ const Home = ({ products, setProducts }) => {
                     categorizedProducts.map(product => (
                         <ProductCards key={product._id}
                             id={product._id}
+                            verified={product.verified}
                             name={product.name}
                             image={product.images[0]}
                             price={product.price}

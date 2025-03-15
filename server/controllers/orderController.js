@@ -1,5 +1,6 @@
 import orderModel from "../models/orderModel.js";
 import productModel from "../models/productModel.js";
+import userModel from "../models/userModel.js";
 
 //route api/v1/order/:userId
 export const placeOrder = async (req, res, next) => {
@@ -7,6 +8,9 @@ export const placeOrder = async (req, res, next) => {
         const { userId, orderDetails, orderdProducts, single } = req.body;
         let products;
         let totalAmount;
+
+        if(!await userModel.findById(userId))
+            return res.status(404).json({ message: "User Not Found", success: false });
 
         if (!single) {
             products = await Promise.all(orderdProducts.pId.map(async (productId, index) => {

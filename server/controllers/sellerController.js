@@ -79,6 +79,7 @@ export const sellerSignOut = async (req, res, next) => {
         const seller = await sellerModel.findById(sellerId);
         if (bcryptjs.compareSync(pass, seller.password)) {
             await sellerModel.findOneAndDelete({ _id: sellerId });
+            await productModel.updateMany({ sellerId }, { $set: { verified: false } });
             return res.status(200).json({ message: "Successfully Signed Out", success: true });
         } else {
             return res.status(200).json({ message: "Incorrect Password", success: false });

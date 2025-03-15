@@ -28,7 +28,7 @@ const OrderAccordian3 = ({ orderDetails, handleOrderDetails, totalAmt, orderProd
                             setCartItemsOrdered(false);
                             setTotalItems(0);
                         } else {
-                            toast.success(response.data.message);
+                            toast.error(response.data.message);
                         }
                     })
                     .catch(err => console.log(err.message));
@@ -43,10 +43,13 @@ const OrderAccordian3 = ({ orderDetails, handleOrderDetails, totalAmt, orderProd
                     toast.success(response.data.message);
                     navigate('/');
                 } else {
-                    toast.error("API Error");
+                    toast.error(response.data.message);
                 }
             })
-            .catch(err => toast.error("Error"));
+            .catch(err => {
+                toast.error("Something went wrong please contact the developer with ERROR CODE 104");
+                console.log(err.message);
+            });
     }, [orderdProducts])
 
     return (

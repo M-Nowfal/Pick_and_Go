@@ -26,15 +26,15 @@ export const addProduct = async (req, res, next) => {
         const { name, price, description, stock, brand, category, image1, image2, image3, sellerId, ratings } = req.body.productDetails;
         if (image1 && image2 && image3) {
             await productModel.create({
-                name, description, price, category, images: [image1, image2, image3], brand, stock, sellerId, ratings
+                name, description, price, category, images: [image1, image2, image3], brand, stock, sellerId, ratings, verified: true
             });
         } else if (image1 && image2) {
             await productModel.create({
-                name, description, price, category, images: [image1, image2], brand, stock, sellerId, ratings
+                name, description, price, category, images: [image1, image2], brand, stock, sellerId, ratings, verified: true
             });
         } else {
             await productModel.create({
-                name, description, price, category, images: [image1], brand, stock, sellerId, ratings
+                name, description, price, category, images: [image1 || image2 || image3], brand, stock, sellerId, ratings, verified: true
             });
         }
         return res.status(200).json({ message: "Product Added Successfully", success: true });

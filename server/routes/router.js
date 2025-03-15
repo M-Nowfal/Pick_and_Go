@@ -4,6 +4,7 @@ import { addProduct, getProducts, getSingleProduct, removeProduct, upDateProduct
 import { addToCart, deleteCart, deleteCartProduct, getCart, updateCart } from '../controllers/cartController.js';
 import { placeOrder, getOrders, deleteOrder, getSellerOrders } from '../controllers/orderController.js';
 import { getSeller, getSellerPassword, sellerLogin, sellerLogout, sellerSignIn, sellerSignOut, sellerView, updateSellerDetails } from '../controllers/sellerController.js';
+import { adminLogin, adminLogout, createAdmin, deleteSeller, deleteUser, getSellerDetails, getUserDetails } from '../controllers/adminController.js';
 
 const router = Router();
 
@@ -47,5 +48,14 @@ router.route('/seller/add-product').post(addProduct);
 router.route('/seller/remove-product/:productId').delete(removeProduct);
 router.route('/seller/update-product').put(upDateProduct);
 router.route('/seller/get-orders/:sellerId').get(getSellerOrders);
+
+//Admin Routes
+router.route('/admin/creation').post(createAdmin);
+router.route('/admin/login').post(adminLogin);
+router.route('/admin/logout').post(adminLogout);
+router.route('/admin/user-view').get(getUserDetails);
+router.route('/admin/user-delete/:userId').delete(deleteUser);
+router.route('/admin/seller-view').get(getSellerDetails);
+router.route('/admin/seller-delete/:sellerId').delete(deleteSeller);
 
 export default router;

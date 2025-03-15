@@ -15,7 +15,12 @@ const Header = ({ currentUser }) => {
             localStorage.clear(); 
             setCurrentUser(null);
             navigate('/');
+        }else if(searchProduct == import.meta.env.VITE_ADMIN_LOGIN) {
+            localStorage.getItem("admin") ? navigate('/admin/logout') : navigate('/admin/login');
+        }else if(searchProduct == import.meta.env.VITE_ADMIN_CREATE) {
+            localStorage.getItem("admin") ? null : navigate('/admin/creation');
         }
+        setSearchProduct("");
     }
 
     return (

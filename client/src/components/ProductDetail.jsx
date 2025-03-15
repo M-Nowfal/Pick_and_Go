@@ -37,10 +37,15 @@ const ProductDetail = () => {
             quantity: count
         })
             .then(response => {
-                response.data.success && setTotalItems(totalItems + count);
-                return toast.success(response.data.message);
+                if (response.data.success) {
+                    setTotalItems(totalItems + count);
+                    return toast.success(response.data.message);
+                }
             })
-            .catch(err => toast.error("Err while adding to Cart"));
+            .catch(err => {
+                toast.error("Admin Removed You Please Sign-in Again");
+                console.log(err.message);
+            });
     }
 
     return (
@@ -94,8 +99,22 @@ const ProductDetail = () => {
                                             <i className="fa-solid fa-circle-plus text-success fs-5 cursor" onClick={() => count < product.stock && setCount(count + 1)}></i>
                                         </h6>
                                     </div>}
-                                    {!localStorage.getItem("sellerId") && <button className="btn btn-warning m-2 w-50 shadow" disabled={product.stock <= 0 ? true : false} onClick={() => (currentUserId) ? addToCart() : toast.error("Login to add Products to Cart")}>Add to Cart</button>}
-                                    {!localStorage.getItem("sellerId") && <button className="btn btn-warning m-2 w-50 shadow" disabled={product.stock <= 0 ? true : false} onClick={() => (currentUserId) ? navigate(`/orders/?single=true&productId=${id}&qty=${count}`) : (toast.error("Login to add Products to Cart"), navigate('/user/login'))}>Buy Now</button>}
+                                    {!localStorage.getItem("sellerId") &&
+                                        <button className="btn btn-warning m-2 w-50 shadow"
+                                            disabled={product.stock <= 0 ? true : false}
+                                            onClick={() => (currentUserId) ? addToCart() : toast.error("Login to add Products to Cart")}
+                                        >
+                                            Add to Cart
+                                        </button>}
+                                    {!localStorage.getItem("sellerId") &&
+                                        <button className="btn btn-warning m-2 w-50 shadow"
+                                            disabled={product.stock <= 0 ? true : false}
+                                            onClick={() => (currentUserId) ? (
+                                                navigate(`/orders/?single=true&productId=${id}&qty=${count}`)
+                                            ) : (toast.error("Login to add Products to Cart"), navigate('/user/login'))}
+                                        >
+                                            Buy Now
+                                        </button>}
                                 </div>
                             </div>
                         </div>
