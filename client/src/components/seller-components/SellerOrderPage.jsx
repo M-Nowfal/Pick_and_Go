@@ -24,8 +24,8 @@ const SellerOrderPage = () => {
     },[]);
 
     return (
-        !orders ? <Loader /> : <div className="container mt-5">
-            <div className="row mt-5 pt-5">
+        !orders ? <Loader /> : <div className="container">
+            <div className="row">
                 <SellerOrder orders={orders} />
             </div>
         </div>

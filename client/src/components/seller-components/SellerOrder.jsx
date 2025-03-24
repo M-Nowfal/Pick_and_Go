@@ -10,7 +10,7 @@ const SellerOrder = ({ orders }) => {
     }
 
     return (
-        <div className="container mt-4">
+        <div className="container mt-5 pt-5">
             <h2 className="mb-4">Orders</h2>
             <div className="row">
                 {orders.map(order => (
